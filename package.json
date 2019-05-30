@@ -1,0 +1,34 @@
+{
+  "name": "root",
+  "private": true,
+  "author": "Tyrcord Inc. <dev@tyrcord.com>",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tyrcord/matex.git"
+  },
+  "homepage": "https://github.com/tyrcord/matex",
+  "bugs": "https://github.com/tyrcord/matex/issues",
+  "engines": {
+    "node": ">=8.9.0"
+  },
+  "devDependencies": {
+    "husky": "^2.3.0",
+    "lerna": "^3.14.1",
+    "codecov": "^3.5.0"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lerna run lint",
+      "pre-push": "lerna run test"
+    }
+  },
+  "scripts": {
+    "postinstall": "lerna bootstrap",
+    "format": "lerna run format",
+    "build": "lerna run build",
+    "test": "lerna run test",
+    "coverage": "lerna run coverage",
+    "codecov": "npm run coverage && lerna run codecov && codecov"
+  }
+}

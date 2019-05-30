@@ -1,0 +1,53 @@
+{
+  "name": "@matex/indicators",
+  "version": "0.0.0",
+  "description": "Library of indicators for technical analysis",
+  "author": "Tyrcord Inc. <dev@tyrcord.com>",
+  "license": "ISC",
+  "main": "./dist/index.js",
+  "types": "./dist/types/index.d.ts",
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
+  "files": [
+    "dist/**/*"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "rm -rf ./dist && tsc",
+    "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
+    "lint": "tslint -p tsconfig.json",
+    "prepare": "npm run build",
+    "prepublishOnly": "npm test && npm run lint",
+    "test": "NODE_ENV=test mocha",
+    "coverage": "nyc npm test",
+    "codecov": "nyc merge .nyc_output ./coverage/coverage.json",
+    "docs": "typedoc --theme minimal --mode file --excludePrivate --excludeProtected --out docs ./src"
+  },
+  "peerDependencies": {
+    "rxjs": "^6.5.2"
+  },
+  "devDependencies": {
+    "@types/chai": "^4.1.7",
+    "@types/mocha": "^5.2.6",
+    "@types/node": "^12.0.2",
+    "@types/sinon": "^7.0.11",
+    "chai": "^4.2.0",
+    "esm": "^3.2.22",
+    "mocha": "^6.1.4",
+    "nyc": "^14.1.1",
+    "prettier": "^1.17.1",
+    "rxjs": "^6.5.2",
+    "sinon": "^7.3.2",
+    "source-map-support": "^0.5.12",
+    "ts-node": "^8.1.0",
+    "tslib": "^1.9.3",
+    "tslint": "^5.16.0",
+    "tslint-config-prettier": "^1.18.0",
+    "tslint-sonarts": "^1.9.0",
+    "typescript": "^3.4.5"
+  }
+}
