@@ -1,11 +1,21 @@
-export class BaseCalculator<T = {}> {
-  protected data: T;
+export class BaseCalculator<S extends object = {}, R = {}> {
+  protected state: S;
 
-  protected result: number | null = null;
+  protected result: R | null = null;
 
-  protected setValue(key: keyof T, value: any) {
+  constructor(private initialState: any = {}) {
+    this.state = { ...initialState };
+  }
+
+  public reset() {
     this.result = null;
-    this.data[key] = value;
+    this.state = { ...this.initialState };
+    return this;
+  }
+
+  protected setValue(key: keyof S, value: any) {
+    this.result = null;
+    this.state[key] = value;
     return this;
   }
 }

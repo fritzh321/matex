@@ -1,6 +1,6 @@
 import { BaseCalculator } from './base';
 
-type PipCalculatorData = {
+type PipCalculatorState = {
   baseRate: number;
   precision: number;
   rate: number;
@@ -8,14 +8,18 @@ type PipCalculatorData = {
   size: number;
 };
 
-class PipCalculator extends BaseCalculator<PipCalculatorData> {
-  protected data: PipCalculatorData = {
-    baseRate: 1,
-    precision: 4,
-    rate: 1,
-    second: false,
-    size: 1,
-  };
+const initialPipCalculatorState = {
+  baseRate: 1,
+  precision: 4,
+  rate: 1,
+  second: false,
+  size: 1,
+};
+
+class PipCalculator extends BaseCalculator<PipCalculatorState, number> {
+  constructor() {
+    super(initialPipCalculatorState);
+  }
 
   public pipPrecision(precision: number) {
     return this.setValue('precision', precision);
@@ -42,7 +46,7 @@ class PipCalculator extends BaseCalculator<PipCalculatorData> {
       return this.result;
     }
 
-    const { precision, rate, size, baseRate, second } = this.data;
+    const { precision, rate, size, baseRate, second } = this.state;
     const decimalPip = 1 / Math.pow(10, precision);
 
     return (this.result = (decimalPip / (second ? 1 : rate) / baseRate) * size);

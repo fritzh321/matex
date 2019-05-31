@@ -16,6 +16,11 @@ describe('pip', () => {
       const pipValue = pip().value();
       expect(pipValue).to.equal(0.0001);
     });
+
+    it('should memoize last pip value', () => {
+      const pipCalculator = pip();
+      expect(pipCalculator.value()).to.equal(pipCalculator.value());
+    });
   });
 
   describe('#positionSize()', () => {
@@ -88,6 +93,17 @@ describe('pip', () => {
       const pipValue = pip()
         .currencyPairRate(1.25)
         .listedSecond(true)
+        .value();
+
+      expect(pipValue).to.equal(0.0001);
+    });
+  });
+
+  describe('#reset()', () => {
+    it('should reset the calculator', () => {
+      const pipValue = pip()
+        .positionSize(1000)
+        .reset()
         .value();
 
       expect(pipValue).to.equal(0.0001);
