@@ -1,7 +1,4 @@
 {
-  "packages": [
-    "packages/*"
-  ],
   "version": "0.0.0",
   "npmClient": "npm",
   "command": {
@@ -12,7 +9,13 @@
       "message": "Publish %s"
     },
     "bootstrap": {
-      "ignore": "component-*"
+      "ignore": "component-*",
+      "npmClientArgs": [
+        "--no-package-lock"
+      ]
     }
-  }
+  },
+  "packages": [
+    "packages/*"
+  ]
 }
