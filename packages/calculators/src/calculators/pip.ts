@@ -1,4 +1,6 @@
-import { BaseCalculator } from './base';
+import { BigNumber } from 'bignumber.js'
+
+import { BaseCalculator } from '../abstract/base';
 
 type PipCalculatorState = {
   baseRate: number;
@@ -41,15 +43,20 @@ class PipCalculator extends BaseCalculator<PipCalculatorState, number> {
     return this.setValue('second', second);
   }
 
-  public value() {
+  public value(): number {
     if (this.result !== null) {
       return this.result;
     }
 
-    const { precision, rate, size, baseRate, second } = this.state;
-    const decimalPip = 1 / Math.pow(10, precision);
+    const { precision, rate, size, baseRate, second } = this.validState;
+    const decimalPip = new BigNumber(1).dividedBy(Math.pow(10, precision));
 
-    return (this.result = (decimalPip / (second ? 1 : rate) / baseRate) * size);
+    return (this.result = decimalPip
+      .dividedBy(second ? 1 : rate)
+      .dividedBy(baseRate)
+      .multipliedBy(size)
+      .toNumber()
+    );
   }
 }
 

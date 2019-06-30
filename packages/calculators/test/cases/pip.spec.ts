@@ -1,13 +1,13 @@
 import { expect } from 'chai';
 import 'mocha';
 
-import { pip } from '../../src/pip';
+import { pip } from '../../src/calculators/pip';
 
 describe('pip', () => {
   describe('pip()', () => {
     it('should return an instance of the PipCalculator class', () => {
-      const pipCalculator = pip();
-      expect(typeof pipCalculator).to.equal('object');
+      const calculator = pip();
+      expect(typeof calculator).to.equal('object');
     });
   });
 
@@ -18,8 +18,8 @@ describe('pip', () => {
     });
 
     it('should memoize last pip value', () => {
-      const pipCalculator = pip();
-      expect(pipCalculator.value()).to.equal(pipCalculator.value());
+      const calculator = pip();
+      expect(calculator.value()).to.equal(calculator.value());
     });
   });
 
