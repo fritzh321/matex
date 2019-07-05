@@ -1,5 +1,5 @@
 import { BigNumber } from 'bignumber.js';
-import { BaseCalculator } from '../abstract/base';
+import { BaseCalculator } from './abstract/base';
 import {
   initialRequiredMarginCalculatorState,
   RequiredMarginCalculatorState,

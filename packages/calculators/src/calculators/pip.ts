@@ -5,7 +5,7 @@ import {
   PipCalculatorState,
 } from '../states/pip.state';
 
-import { BaseCalculator } from '../abstract/base';
+import { BaseCalculator } from './abstract/base';
 
 class PipCalculator extends BaseCalculator<PipCalculatorState, number> {
   constructor() {

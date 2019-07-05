@@ -1,5 +1,5 @@
-import { sortNumberAsc, sortNumberDesc } from '../helpers/sort';
-import { StateValidator } from '../types/state-validator.type';
+import { sortNumberAsc, sortNumberDesc } from '../../helpers/sort';
+import { StateValidator } from '../../types/state-validator.type';
 
 export abstract class BaseCalculator<S extends object = {}, R = {}> {
   protected state: S;
