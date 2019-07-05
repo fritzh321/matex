@@ -11,5 +11,5 @@ export const initialPipCalculatorState: PipCalculatorState = {
   precision: 4,
   rate: 1,
   second: false,
-  size: 1,
+  size: 0,
 };
