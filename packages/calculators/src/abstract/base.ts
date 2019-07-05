@@ -14,7 +14,7 @@ export abstract class BaseCalculator<S extends object = {}, R = {}> {
 
   constructor(
     protected initialState: S = {} as S,
-    protected validators?: Array<StateValidator<S>>
+    protected validators?: Array<StateValidator<S>>,
   ) {
     this.state = { ...initialState };
   }

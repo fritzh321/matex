@@ -1,4 +1,4 @@
-import { BigNumber } from 'bignumber.js'
+import { BigNumber } from 'bignumber.js';
 import { BaseCalculator } from '../abstract/base';
 import { TrendEnum } from '../enums/trend';
 import {
@@ -13,10 +13,10 @@ import {
 } from '../types/fibonnaci.type';
 import { fibonnaciLevelsValidators } from '../validators/fibonnaci.validator';
 
-
-class FibonnaciLevelsCalculator
-  extends BaseCalculator<FibonnaciLevelsState, FibonnaciLevelsResult> {
-
+class FibonnaciLevelsCalculator extends BaseCalculator<
+  FibonnaciLevelsState,
+  FibonnaciLevelsResult
+> {
   constructor() {
     super(initialFibonnaciLevelsState, fibonnaciLevelsValidators);
   }
@@ -65,17 +65,20 @@ class FibonnaciLevelsCalculator
     const delta = high - low;
 
     if (trend === 'down') {
-      return extensions.slice().reverse().map(level => {
-        return this.makeFibonnaciLevel(
-          level,
-          new BigNumber(level)
-            .dividedBy(100)
-            .multipliedBy(delta)
-            .negated()
-            .plus(low)
-            .toNumber()
-        );
-      });
+      return extensions
+        .slice()
+        .reverse()
+        .map(level => {
+          return this.makeFibonnaciLevel(
+            level,
+            new BigNumber(level)
+              .dividedBy(100)
+              .multipliedBy(delta)
+              .negated()
+              .plus(low)
+              .toNumber(),
+          );
+        });
     }
 
     return extensions.map(level => {
@@ -85,7 +88,7 @@ class FibonnaciLevelsCalculator
           .dividedBy(100)
           .multipliedBy(delta)
           .plus(high)
-          .toNumber()
+          .toNumber(),
       );
     });
   }
@@ -95,16 +98,19 @@ class FibonnaciLevelsCalculator
     const delta = high - low;
 
     if (trend === 'down') {
-      return retracements.slice().reverse().map(level => {
-        return this.makeFibonnaciLevel(
-          level,
-          new BigNumber(level)
-            .dividedBy(100)
-            .multipliedBy(delta)
-            .plus(low)
-            .toNumber()
-        );
-      });
+      return retracements
+        .slice()
+        .reverse()
+        .map(level => {
+          return this.makeFibonnaciLevel(
+            level,
+            new BigNumber(level)
+              .dividedBy(100)
+              .multipliedBy(delta)
+              .plus(low)
+              .toNumber(),
+          );
+        });
     }
 
     return retracements.map(level => {
@@ -115,7 +121,7 @@ class FibonnaciLevelsCalculator
           .multipliedBy(delta)
           .negated()
           .plus(high)
-          .toNumber()
+          .toNumber(),
       );
     });
   }

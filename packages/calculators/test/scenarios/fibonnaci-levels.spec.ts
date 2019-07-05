@@ -27,7 +27,9 @@ Feature('Calculating Fibonnaci Levels', () => {
     Then('the fibonnaci levels should be valid', () => {
       expect(calculator.valid()).to.equal(true);
       const fibonnaciLevelsResult = calculator.value();
-      expect(fibonnaciLevelsResult).to.deep.equal(defaultFibonnaciLevelsResultUp);
+      expect(fibonnaciLevelsResult).to.deep.equal(
+        defaultFibonnaciLevelsResultUp,
+      );
       expect(fibonnaciLevelsResult.extensions[0].label).to.equal('261.8%');
       expect(fibonnaciLevelsResult.retracements[0].label).to.equal('23.6%');
     });
@@ -51,7 +53,9 @@ Feature('Calculating Fibonnaci Levels', () => {
     Then('the fibonnaci levels should be valid', () => {
       expect(calculator.valid()).to.equal(true);
       const fibonnaciLevelsResult = calculator.value();
-      expect(fibonnaciLevelsResult).to.deep.equal(defaultFibonnaciLevelsResultDown);
+      expect(fibonnaciLevelsResult).to.deep.equal(
+        defaultFibonnaciLevelsResultDown,
+      );
       expect(fibonnaciLevelsResult.extensions[0].label).to.equal('23.6%');
       expect(fibonnaciLevelsResult.retracements[0].label).to.equal('78.6%');
     });

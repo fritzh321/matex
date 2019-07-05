@@ -4,12 +4,12 @@ export type FibonnaciLevelsResult = {
 };
 
 export type FibonnaciLevel = {
-  label: string,
-  value: number,
+  label: string;
+  value: number;
 };
 
-export type FibonnaciExtensionType = (
-  23.6
+export type FibonnaciExtensionType =
+  | 23.6
   | 38.2
   | 50
   | 61.8
@@ -18,15 +18,13 @@ export type FibonnaciExtensionType = (
   | 138.2
   | 161.8
   | 200
-  | 261.8
-);
+  | 261.8;
 
-export type FibonnaciRetracementType = (
-  23.6
+export type FibonnaciRetracementType =
+  | 23.6
   | 38.2
   | 50
   | 61.8
   | 78.6
   | 100
-  | 138.2
-);
+  | 138.2;

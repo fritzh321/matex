@@ -1,4 +1,4 @@
-import { BigNumber } from 'bignumber.js'
+import { BigNumber } from 'bignumber.js';
 
 import {
   initialPipCalculatorState,
@@ -44,8 +44,7 @@ class PipCalculator extends BaseCalculator<PipCalculatorState, number> {
       .dividedBy(second ? 1 : rate)
       .dividedBy(baseRate)
       .multipliedBy(size)
-      .toNumber()
-    );
+      .toNumber());
   }
 }
 
