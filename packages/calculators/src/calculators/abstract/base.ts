@@ -30,6 +30,10 @@ export abstract class BaseCalculator<S extends object = {}, R = {}> {
   }
 
   protected setValue(key: keyof S, value: any): this {
+    if (typeof value === 'number') {
+      value = Math.abs(value);
+    }
+
     this.result = null;
     this.state[key] = value;
     this.checkValidity();
