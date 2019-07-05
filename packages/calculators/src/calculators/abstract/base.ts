@@ -35,8 +35,13 @@ export abstract class BaseCalculator<S extends object = {}, R = {}> {
     }
 
     this.result = null;
-    this.state[key] = value;
+    this.state = {
+      ...this.state,
+      [key]: value,
+    };
+
     this.checkValidity();
+
     return this;
   }
 
