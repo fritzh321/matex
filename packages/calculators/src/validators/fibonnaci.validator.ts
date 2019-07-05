@@ -6,7 +6,7 @@ export const fibonnaciLevelsValidators: Array<
 > = [
   (state: FibonnaciLevelsState) => {
     if (state.low > 0 || state.high > 0) {
-      return state.high > state.low;
+      return state.high >= state.low;
     }
 
     return true;

@@ -23,7 +23,7 @@ Feature('Calculating the required margin', () => {
       calculator.leverage(20);
     });
 
-    Then('the required margin should be 6,250$', () => {
+    Then('the required margin should be $6,250', () => {
       expect(calculator.valid()).to.equal(true);
       expect(calculator.value()).to.equal(6250);
     });
@@ -44,7 +44,7 @@ Feature('Calculating the required margin', () => {
       calculator.leverage(20);
     });
 
-    Then('the required margin should be 5000€', () => {
+    Then('the required margin should be €5000', () => {
       expect(calculator.valid()).to.equal(true);
       expect(calculator.value()).to.equal(5000);
     });

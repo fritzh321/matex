@@ -1,34 +1,133 @@
 import { expect } from 'chai';
 import 'mocha';
 
-import { fibonnaciLevels } from '../../src/calculators/fibonnaci-levels';
+import {
+  fibonnaciLevels,
+  FibonnaciLevelsCalculator,
+} from '../../src/calculators/fibonnaci-levels';
+
+import {
+  SHOULD_MEMOIZE_LAST_VALUE,
+  SHOULD_RETURN_CALCULATOR_INSTANCE,
+  SHOULD_RETURN_CALCULATOR_REFERENCE,
+} from '../messages/shared';
+
+import { TrendEnum } from '../../src/enums/trend.enum';
 import { defaultFibonnaciLevelsResult } from '../samples/fibonnaci-levels.sample';
 
 describe('fibonnaciLevels', () => {
+  let calculator: FibonnaciLevelsCalculator;
+
+  beforeEach(() => {
+    calculator = fibonnaciLevels();
+  });
+
   describe('fibonnaciLevels()', () => {
-    it('should return an instance of the FibonnaciLevelsCalculator class', () => {
-      const calculator = fibonnaciLevels();
+    it(SHOULD_RETURN_CALCULATOR_INSTANCE('FibonnaciLevelsCalculator'), () => {
       expect(typeof calculator).to.equal('object');
     });
   });
 
   describe('#value()', () => {
-    it('should compute the fibonnaci levels extensions and retracements', () => {
+    it('should compute the fibonnaci levels extensions and retracements with default values', () => {
       const fibonnaciLevelsResult = fibonnaciLevels().value();
       expect(fibonnaciLevelsResult).to.deep.equal(defaultFibonnaciLevelsResult);
     });
 
-    it('should memoize last value', () => {
-      const calculator = fibonnaciLevels();
+    it(SHOULD_MEMOIZE_LAST_VALUE, () => {
       expect(calculator.value()).to.equal(calculator.value());
     });
   });
 
+  describe('#low()', () => {
+    it(SHOULD_RETURN_CALCULATOR_REFERENCE, () => {
+      expect(calculator.low(5)).to.equal(calculator);
+    });
+  });
+
+  describe('#high()', () => {
+    it(SHOULD_RETURN_CALCULATOR_REFERENCE, () => {
+      expect(calculator.high(5)).to.equal(calculator);
+    });
+  });
+
+  describe('#custom()', () => {
+    it(SHOULD_RETURN_CALCULATOR_REFERENCE, () => {
+      expect(calculator.custom(5)).to.equal(calculator);
+    });
+  });
+
+  describe('#precision()', () => {
+    it(SHOULD_RETURN_CALCULATOR_REFERENCE, () => {
+      expect(calculator.precision(5)).to.equal(calculator);
+    });
+  });
+
+  describe('#extensions()', () => {
+    it(SHOULD_RETURN_CALCULATOR_REFERENCE, () => {
+      expect(calculator.extensions([23.6])).to.equal(calculator);
+    });
+
+    it('Should define the extension levels', () => {
+      calculator.extensions([50]);
+      expect(calculator.value().extensions[0].label).to.equal('50%');
+    });
+  });
+
+  describe('#retracements()', () => {
+    it(SHOULD_RETURN_CALCULATOR_REFERENCE, () => {
+      expect(calculator.retracements([23.6])).to.equal(calculator);
+    });
+
+    it('Should define the retracements levels', () => {
+      calculator.retracements([50]);
+      expect(calculator.value().retracements[0].label).to.equal('50%');
+    });
+  });
+
+  describe('#trend()', () => {
+    it(SHOULD_RETURN_CALCULATOR_REFERENCE, () => {
+      expect(calculator.trend(TrendEnum.Up)).to.equal(calculator);
+    });
+  });
+
+  describe('#valid()', () => {
+    it('Should be valid with no high or low value set', () => {
+      expect(calculator.valid()).to.equal(true);
+    });
+
+    it('Should not be valid when only the low price is set', () => {
+      calculator.low(1.25);
+      expect(calculator.valid()).to.equal(false);
+    });
+
+    it('Should be valid when only the high price is set', () => {
+      calculator.high(1.25);
+      expect(calculator.valid()).to.equal(true);
+    });
+
+    it('Should be valid when low <= high', () => {
+      calculator.high(1.35).low(2);
+
+      expect(calculator.valid()).to.equal(false);
+
+      calculator.low(1.25);
+      expect(calculator.valid()).to.equal(true);
+
+      calculator.low(1.35);
+      expect(calculator.valid()).to.equal(true);
+    });
+  });
+
   describe('#reset()', () => {
+    it(SHOULD_RETURN_CALCULATOR_REFERENCE, () => {
+      expect(calculator.reset()).to.equal(calculator);
+    });
+
     it('should reset the calculator', () => {
       const fibonnaciLevelsResult = fibonnaciLevels()
         .high(1.35)
-        .high(1.25)
+        .low(1.25)
         .reset()
         .value();
 

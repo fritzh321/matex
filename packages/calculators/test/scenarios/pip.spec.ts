@@ -7,7 +7,6 @@ Feature('Calculating Pip Value', () => {
   Scenario('When the currency account is listed second in a pair', () => {
     const calculator = pip();
 
-    // tslint:disable-next-line: no-duplicate-string
     Given('my trading account is in USD', () => {
       expect(typeof calculator).to.equal('object');
     });
@@ -20,9 +19,8 @@ Feature('Calculating Pip Value', () => {
       calculator.currencyPairRate(1.25);
     });
 
-    // tslint:disable-next-line: no-duplicate-string
-    When('my position size is 100000', () => {
-      calculator.positionSize(100000);
+    When('my position size is 100,000', () => {
+      calculator.positionSize(100_000);
     });
 
     Then('the pip value should be equal to $10', () => {
@@ -33,11 +31,11 @@ Feature('Calculating Pip Value', () => {
   Scenario('When the currency account is listed first in a pair', () => {
     const calculator = pip();
 
-    Given('my trading account is in USD', () => {
+    Given('my trading account is in EUR', () => {
       expect(typeof calculator).to.equal('object');
     });
 
-    And('USD is listed first in the pair USD/CAD', () => {
+    And('USD is listed first in the pair EUR/CAD', () => {
       calculator.listedSecond(false); // default value
     });
 
@@ -45,8 +43,8 @@ Feature('Calculating Pip Value', () => {
       calculator.currencyPairRate(1.25);
     });
 
-    When('my position size is 100000', () => {
-      calculator.positionSize(100000);
+    When('my position size is 100,000', () => {
+      calculator.positionSize(100_000);
     });
 
     Then('the pip value should be equal to $8', () => {
@@ -70,8 +68,8 @@ Feature('Calculating Pip Value', () => {
       calculator.accountBaseRate(1.6);
     });
 
-    When('my position size is 100000', () => {
-      calculator.positionSize(100000);
+    When('my position size is 100, 000', () => {
+      calculator.positionSize(100_000);
     });
 
     Then('the pip value should be equal to $6.25', () => {
