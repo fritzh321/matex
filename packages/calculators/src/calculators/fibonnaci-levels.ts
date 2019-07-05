@@ -2,39 +2,23 @@ import { BigNumber } from 'bignumber.js'
 import { BaseCalculator } from '../abstract/base';
 import { TrendEnum } from '../enums/trend';
 import {
+  FibonnaciLevelsState,
+  initialFibonnaciLevelsState,
+} from '../states/fibonnaci.state';
+import {
   FibonnaciExtensionType,
   FibonnaciLevel,
   FibonnaciLevelsResult,
-  FibonnaciLevelsState,
   FibonnaciRetracementType,
-} from '../types/fibonnaci';
-import { StateValidator } from '../types/state-validator';
+} from '../types/fibonnaci.type';
+import { fibonnaciLevelsValidators } from '../validators/fibonnaci.validator';
 
-const initialState: FibonnaciLevelsState = {
-  custom: 0,
-  extensions: [261.8, 200, 161.8, 138.2, 100, 61.8, 50, 38.2, 23.6],
-  high: 0,
-  low: 0,
-  precision: 5,
-  retracements: [23.6, 38.2, 50, 61.8, 78.6],
-  trend: TrendEnum.Up,
-};
-
-const fibonnaciLevelsValidators: Array<StateValidator<FibonnaciLevelsState>> = [
-  (state: FibonnaciLevelsState) => {
-    if (state.low > 0 || state.high > 0) {
-      return state.high > state.low;
-    }
-
-    return true;
-  }
-];
 
 class FibonnaciLevelsCalculator
   extends BaseCalculator<FibonnaciLevelsState, FibonnaciLevelsResult> {
 
   constructor() {
-    super(initialState, fibonnaciLevelsValidators);
+    super(initialFibonnaciLevelsState, fibonnaciLevelsValidators);
   }
 
   public custom(custom: number) {

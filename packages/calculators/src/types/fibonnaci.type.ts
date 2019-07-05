@@ -1,15 +1,3 @@
-import { TrendEnum } from 'src/enums/trend';
-
-export type FibonnaciLevelsState = {
-  custom: number;
-  extensions: FibonnaciExtensionType[];
-  high: number;
-  low: number;
-  precision: number;
-  retracements: FibonnaciRetracementType[];
-  trend: TrendEnum;
-};
-
 export type FibonnaciLevelsResult = {
   extensions: FibonnaciLevel[];
   retracements: FibonnaciLevel[];

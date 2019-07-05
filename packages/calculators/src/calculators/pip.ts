@@ -1,22 +1,11 @@
 import { BigNumber } from 'bignumber.js'
 
+import {
+  initialPipCalculatorState,
+  PipCalculatorState,
+} from '../states/pip.state';
+
 import { BaseCalculator } from '../abstract/base';
-
-type PipCalculatorState = {
-  baseRate: number;
-  precision: number;
-  rate: number;
-  second: boolean;
-  size: number;
-};
-
-const initialPipCalculatorState = {
-  baseRate: 1,
-  precision: 4,
-  rate: 1,
-  second: false,
-  size: 1,
-};
 
 class PipCalculator extends BaseCalculator<PipCalculatorState, number> {
   constructor() {
