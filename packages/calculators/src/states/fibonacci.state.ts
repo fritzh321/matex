@@ -1,21 +1,21 @@
 import { TrendEnum } from '../enums/trend.enum';
 
 import {
-  FibonnaciExtensionType,
-  FibonnaciRetracementType,
-} from '../types/fibonnaci.type';
+  FibonacciExtensionType,
+  FibonacciRetracementType,
+} from '../types/fibonacci.type';
 
-export type FibonnaciLevelsState = {
+export type FibonacciLevelsState = {
   custom: number;
-  extensions: FibonnaciExtensionType[];
+  extensions: FibonacciExtensionType[];
   high: number;
   low: number;
   precision: number;
-  retracements: FibonnaciRetracementType[];
+  retracements: FibonacciRetracementType[];
   trend: TrendEnum;
 };
 
-export const initialFibonnaciLevelsState: FibonnaciLevelsState = {
+export const initialFibonacciLevelsState: FibonacciLevelsState = {
   custom: 0,
   extensions: [261.8, 200, 161.8, 138.2, 100, 61.8, 50, 38.2, 23.6],
   high: 0,

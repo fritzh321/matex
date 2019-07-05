@@ -1,33 +1,33 @@
 import { BigNumber } from 'bignumber.js';
 import { TrendEnum } from '../enums/trend.enum';
-import { fibonnaciLevelsValidators } from '../validators/fibonnaci.validator';
+import { fibonacciLevelsValidators } from '../validators/fibonacci.validator';
 import { BaseCalculator } from './abstract/base';
 
 import {
-  FibonnaciLevelsState,
-  initialFibonnaciLevelsState,
-} from '../states/fibonnaci.state';
+  FibonacciLevelsState,
+  initialFibonacciLevelsState,
+} from '../states/fibonacci.state';
 
 import {
-  FibonnaciExtensionType,
-  FibonnaciLevel,
-  FibonnaciLevelsResult,
-  FibonnaciRetracementType,
-} from '../types/fibonnaci.type';
+  FibonacciExtensionType,
+  FibonacciLevel,
+  FibonacciLevelsResult,
+  FibonacciRetracementType,
+} from '../types/fibonacci.type';
 
-export class FibonnaciLevelsCalculator extends BaseCalculator<
-  FibonnaciLevelsState,
-  FibonnaciLevelsResult
+export class FibonacciLevelsCalculator extends BaseCalculator<
+  FibonacciLevelsState,
+  FibonacciLevelsResult
 > {
   constructor() {
-    super(initialFibonnaciLevelsState, fibonnaciLevelsValidators);
+    super(initialFibonacciLevelsState, fibonacciLevelsValidators);
   }
 
   public custom(custom: number) {
     return this.setValue('custom', custom);
   }
 
-  public extensions(extensions: FibonnaciExtensionType[]) {
+  public extensions(extensions: FibonacciExtensionType[]) {
     return this.setValue('extensions', this.sortNumbers(extensions, false));
   }
 
@@ -43,7 +43,7 @@ export class FibonnaciLevelsCalculator extends BaseCalculator<
     return this.setValue('precision', precision);
   }
 
-  public retracements(retracements: FibonnaciRetracementType[]) {
+  public retracements(retracements: FibonacciRetracementType[]) {
     return this.setValue('retracements', this.sortNumbers(retracements));
   }
 
@@ -71,7 +71,7 @@ export class FibonnaciLevelsCalculator extends BaseCalculator<
         .slice()
         .reverse()
         .map(level => {
-          return this.makeFibonnaciLevel(
+          return this.makeFibonacciLevel(
             level,
             new BigNumber(level)
               .dividedBy(100)
@@ -84,7 +84,7 @@ export class FibonnaciLevelsCalculator extends BaseCalculator<
     }
 
     return extensions.map(level => {
-      return this.makeFibonnaciLevel(
+      return this.makeFibonacciLevel(
         level,
         new BigNumber(level)
           .dividedBy(100)
@@ -104,7 +104,7 @@ export class FibonnaciLevelsCalculator extends BaseCalculator<
         .slice()
         .reverse()
         .map(level => {
-          return this.makeFibonnaciLevel(
+          return this.makeFibonacciLevel(
             level,
             new BigNumber(level)
               .dividedBy(100)
@@ -116,7 +116,7 @@ export class FibonnaciLevelsCalculator extends BaseCalculator<
     }
 
     return retracements.map(level => {
-      return this.makeFibonnaciLevel(
+      return this.makeFibonacciLevel(
         level,
         new BigNumber(level)
           .dividedBy(100)
@@ -140,14 +140,14 @@ export class FibonnaciLevelsCalculator extends BaseCalculator<
     return +bigNumber.toFixed(precision);
   }
 
-  private makeFibonnaciLevel(level: number, value: number): FibonnaciLevel {
+  private makeFibonacciLevel(level: number, value: number): FibonacciLevel {
     return {
-      label: this.formatLevelLabel(level),
+      level: this.formatLevelLabel(level),
       value: this.formatLevelValue(value),
     };
   }
 }
 
-export function fibonnaciLevels() {
-  return new FibonnaciLevelsCalculator();
+export function fibonacciLevels() {
+  return new FibonacciLevelsCalculator();
 }

@@ -2,9 +2,9 @@ import { expect } from 'chai';
 import 'mocha';
 
 import {
-  fibonnaciLevels,
-  FibonnaciLevelsCalculator,
-} from '../../src/calculators/fibonnaci-levels';
+  fibonacciLevels,
+  FibonacciLevelsCalculator,
+} from '../../src/calculators/fibonacci-levels';
 
 import {
   SHOULD_MEMOIZE_LAST_VALUE,
@@ -13,25 +13,25 @@ import {
 } from '../messages/shared';
 
 import { TrendEnum } from '../../src/enums/trend.enum';
-import { defaultFibonnaciLevelsResult } from '../samples/fibonnaci-levels.sample';
+import { defaultFibonacciLevelsResult } from '../samples/fibonacci-levels.sample';
 
 describe('fibonnaciLevels', () => {
-  let calculator: FibonnaciLevelsCalculator;
+  let calculator: FibonacciLevelsCalculator;
 
   beforeEach(() => {
-    calculator = fibonnaciLevels();
+    calculator = fibonacciLevels();
   });
 
   describe('fibonnaciLevels()', () => {
-    it(SHOULD_RETURN_CALCULATOR_INSTANCE('FibonnaciLevelsCalculator'), () => {
+    it(SHOULD_RETURN_CALCULATOR_INSTANCE('FibonacciLevelsCalculator'), () => {
       expect(typeof calculator).to.equal('object');
     });
   });
 
   describe('#value()', () => {
     it('should compute the fibonnaci levels extensions and retracements with default values', () => {
-      const fibonnaciLevelsResult = fibonnaciLevels().value();
-      expect(fibonnaciLevelsResult).to.deep.equal(defaultFibonnaciLevelsResult);
+      const fibonnaciLevelsResult = fibonacciLevels().value();
+      expect(fibonnaciLevelsResult).to.deep.equal(defaultFibonacciLevelsResult);
     });
 
     it(SHOULD_MEMOIZE_LAST_VALUE, () => {
@@ -70,7 +70,7 @@ describe('fibonnaciLevels', () => {
 
     it('Should define the extension levels', () => {
       calculator.extensions([50]);
-      expect(calculator.value().extensions[0].label).to.equal('50%');
+      expect(calculator.value().extensions[0].level).to.equal('50%');
     });
   });
 
@@ -81,7 +81,7 @@ describe('fibonnaciLevels', () => {
 
     it('Should define the retracements levels', () => {
       calculator.retracements([50]);
-      expect(calculator.value().retracements[0].label).to.equal('50%');
+      expect(calculator.value().retracements[0].level).to.equal('50%');
     });
   });
 
@@ -125,13 +125,13 @@ describe('fibonnaciLevels', () => {
     });
 
     it('should reset the calculator', () => {
-      const fibonnaciLevelsResult = fibonnaciLevels()
+      const fibonnaciLevelsResult = fibonacciLevels()
         .high(1.35)
         .low(1.25)
         .reset()
         .value();
 
-      expect(fibonnaciLevelsResult).to.deep.equal(defaultFibonnaciLevelsResult);
+      expect(fibonnaciLevelsResult).to.deep.equal(defaultFibonacciLevelsResult);
     });
   });
 });
