@@ -1,6 +1,6 @@
 # `@matex/calculators`
 
-> TODO: description
+Set of Forex Calculators
 
 ## Usage
 
