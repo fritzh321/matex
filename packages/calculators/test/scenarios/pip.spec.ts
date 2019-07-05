@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 import 'mocha-cakes-2';
 
-import { pip } from '../../src/calculators/pip';
+import { pip } from '../../src';
 
 Feature('Calculating Pip Value', () => {
   Scenario('When the currency account is listed second in a pair', () => {

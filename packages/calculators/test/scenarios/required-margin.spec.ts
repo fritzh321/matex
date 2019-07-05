@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 import 'mocha-cakes-2';
 
-import { requiredMargin } from '../../src/calculators/required-margin';
+import { requiredMargin } from '../../src';
 
 Feature('Calculating the required margin', () => {
   Scenario('When the currency account is listed second in a pair', () => {

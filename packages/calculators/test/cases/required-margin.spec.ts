@@ -1,10 +1,7 @@
 import { expect } from 'chai';
 import 'mocha';
 
-import {
-  requiredMargin,
-  RequiredMarginCalculator,
-} from '../../src/calculators/required-margin';
+import { requiredMargin, RequiredMarginCalculator } from '../../src';
 
 import {
   SHOULD_MEMOIZE_LAST_VALUE,

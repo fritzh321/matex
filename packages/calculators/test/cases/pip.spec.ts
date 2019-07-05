@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 import 'mocha';
 
-import { pip } from '../../src/calculators/pip';
+import { pip } from '../../src';
 
 describe('pip', () => {
   describe('pip()', () => {

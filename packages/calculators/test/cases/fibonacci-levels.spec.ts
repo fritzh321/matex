@@ -4,7 +4,8 @@ import 'mocha';
 import {
   fibonacciLevels,
   FibonacciLevelsCalculator,
-} from '../../src/calculators/fibonacci-levels';
+  TrendEnum,
+} from '../../src';
 
 import {
   SHOULD_MEMOIZE_LAST_VALUE,
@@ -12,7 +13,6 @@ import {
   SHOULD_RETURN_CALCULATOR_REFERENCE,
 } from '../messages/shared';
 
-import { TrendEnum } from '../../src/enums/trend.enum';
 import { defaultFibonacciLevelsResult } from '../samples/fibonacci-levels.sample';
 
 describe('fibonnaciLevels', () => {

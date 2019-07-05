@@ -1,8 +1,7 @@
 import { expect } from 'chai';
 import 'mocha-cakes-2';
 
-import { fibonacciLevels } from '../../src/calculators/fibonacci-levels';
-import { TrendEnum } from '../../src/enums/trend.enum';
+import { fibonacciLevels, TrendEnum } from '../../src';
 
 import {
   defaultFibonacciLevelsResultDown,
