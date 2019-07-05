@@ -1,4 +1,5 @@
-import { TrendEnum } from '../enums/trend';
+import { TrendEnum } from '../enums/trend.enum';
+
 import {
   FibonnaciExtensionType,
   FibonnaciRetracementType,

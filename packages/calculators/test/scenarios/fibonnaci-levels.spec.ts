@@ -2,7 +2,7 @@ import { expect } from 'chai';
 import 'mocha-cakes-2';
 
 import { fibonnaciLevels } from '../../src/calculators/fibonnaci-levels';
-import { TrendEnum } from '../../src/enums/trend';
+import { TrendEnum } from '../../src/enums/trend.enum';
 import {
   defaultFibonnaciLevelsResultDown,
   defaultFibonnaciLevelsResultUp,

@@ -1,19 +1,21 @@
 import { BigNumber } from 'bignumber.js';
+import { TrendEnum } from '../enums/trend.enum';
+import { fibonnaciLevelsValidators } from '../validators/fibonnaci.validator';
 import { BaseCalculator } from './abstract/base';
-import { TrendEnum } from '../enums/trend';
+
 import {
   FibonnaciLevelsState,
   initialFibonnaciLevelsState,
 } from '../states/fibonnaci.state';
+
 import {
   FibonnaciExtensionType,
   FibonnaciLevel,
   FibonnaciLevelsResult,
   FibonnaciRetracementType,
 } from '../types/fibonnaci.type';
-import { fibonnaciLevelsValidators } from '../validators/fibonnaci.validator';
 
-class FibonnaciLevelsCalculator extends BaseCalculator<
+export class FibonnaciLevelsCalculator extends BaseCalculator<
   FibonnaciLevelsState,
   FibonnaciLevelsResult
 > {

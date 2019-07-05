@@ -7,7 +7,7 @@ import {
 
 import { BaseCalculator } from './abstract/base';
 
-class PipCalculator extends BaseCalculator<PipCalculatorState, number> {
+export class PipCalculator extends BaseCalculator<PipCalculatorState, number> {
   constructor() {
     super(initialPipCalculatorState);
   }

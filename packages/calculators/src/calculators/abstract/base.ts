@@ -1,4 +1,4 @@
-import { sortNumberAsc, sortNumberDesc } from '../../helpers/sort';
+import { sortNumberAsc, sortNumberDesc } from '../../helpers/sort.helper';
 import { StateValidator } from '../../types/state-validator.type';
 
 export abstract class BaseCalculator<S extends object = {}, R = {}> {
