@@ -3,10 +3,10 @@ import { BigNumber } from 'bignumber.js';
 import {
   initialPositionSizeState,
   PositionSizeState,
-} from 'src/states/position-size.state';
+} from '../../states/position-size.state';
 
 import { BaseCalculator } from '../abstract/base';
-import { pip } from '../pip/pip';
+import { pip } from '../pip-value/pip-value';
 
 export class PositionSizeCalculator extends BaseCalculator<
   PositionSizeState,

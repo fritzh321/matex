@@ -1,4 +1,4 @@
-import { FibonacciLevelsState } from '../states/fibonacci.state';
+import { FibonacciLevelsState } from '../states/fibonacci-levels.state';
 import { StateValidator } from '../types/state-validator.type';
 
 export const fibonacciLevelsValidators: Array<

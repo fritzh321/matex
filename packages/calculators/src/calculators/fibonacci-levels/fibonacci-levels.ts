@@ -2,13 +2,13 @@ import { BigNumber } from 'bignumber.js';
 
 import { TrendEnum } from '../../enums/trend.enum';
 import { sortNumbers } from '../../helpers/sort.helper';
-import { fibonacciLevelsValidators } from '../../validators/fibonacci.validator';
+import { fibonacciLevelsValidators } from '../../validators/fibonacci-levels.validator';
 import { BaseCalculator } from '../abstract/base';
 
 import {
   FibonacciLevelsState,
   initialFibonacciLevelsState,
-} from '../../states/fibonacci.state';
+} from '../../states/fibonacci-levels.state';
 
 import {
   FibonacciExtensionType,
