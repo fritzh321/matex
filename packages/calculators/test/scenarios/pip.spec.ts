@@ -12,11 +12,11 @@ Feature('Calculating Pip Value', () => {
     });
 
     And('USD is listed second in the pair EUR/USD', () => {
-      calculator.listedSecond(true);
+      calculator.baseListedSecond(true);
     });
 
     And('the exchange rate for this pair is 1.25', () => {
-      calculator.currencyPairRate(1.25);
+      calculator.tradingPairExchangeRate(1.25);
     });
 
     When('my position size is 100,000', () => {
@@ -36,11 +36,11 @@ Feature('Calculating Pip Value', () => {
     });
 
     And('USD is listed first in the pair EUR/CAD', () => {
-      calculator.listedSecond(false); // default value
+      calculator.baseListedSecond(false); // default value
     });
 
     And('the exchange rate for this pair is 1.25', () => {
-      calculator.currencyPairRate(1.25);
+      calculator.tradingPairExchangeRate(1.25);
     });
 
     When('my position size is 100,000', () => {
@@ -60,12 +60,12 @@ Feature('Calculating Pip Value', () => {
     });
 
     And('the exchange rate for the pair AUD/JPY is 100', () => {
-      calculator.currencyPairRate(100);
+      calculator.tradingPairExchangeRate(100);
       calculator.pipPrecision(2);
     });
 
     And('the exchange rate for the pair USD/AUD is 1.6', () => {
-      calculator.accountBaseRate(1.6);
+      calculator.baseExchangeRate(1.6);
     });
 
     When('my position size is 100, 000', () => {

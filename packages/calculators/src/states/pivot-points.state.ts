@@ -1,17 +1,17 @@
 import { PivotPointsMethodsEnum } from '../enums/pivot-points-methods.enum';
 
 export type PivotPointsState = {
-  close: number;
-  high: number;
-  low: number;
+  closePrice: number;
+  highPrice: number;
+  lowPrice: number;
   method: PivotPointsMethodsEnum;
-  open: number;
+  openPrice: number;
 };
 
 export const initialPivotPointsState: PivotPointsState = {
-  close: 0,
-  high: 0,
-  low: 0,
+  closePrice: 0,
+  highPrice: 0,
+  lowPrice: 0,
   method: PivotPointsMethodsEnum.Standard,
-  open: 0,
+  openPrice: 0,
 };

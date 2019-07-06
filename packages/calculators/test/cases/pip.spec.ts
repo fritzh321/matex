@@ -61,14 +61,14 @@ describe('pip', () => {
     it('should define the exchange rate of the currency pair when calculating a pip value', () => {
       let pipValue = pip()
         .positionSize(1)
-        .currencyPairRate(1.25)
+        .tradingPairExchangeRate(1.25)
         .value();
 
       expect(pipValue).to.equal(0.00008);
 
       pipValue = pip()
         .positionSize(1)
-        .currencyPairRate(2)
+        .tradingPairExchangeRate(2)
         .value();
 
       expect(pipValue).to.equal(0.00005);
@@ -80,14 +80,14 @@ describe('pip', () => {
     the base currency when calculating a pip value`, () => {
       let pipValue = pip()
         .positionSize(1)
-        .accountBaseRate(1.25)
+        .baseExchangeRate(1.25)
         .value();
 
       expect(pipValue).to.equal(0.00008);
 
       pipValue = pip()
         .positionSize(1)
-        .accountBaseRate(2)
+        .baseExchangeRate(2)
         .value();
 
       expect(pipValue).to.equal(0.00005);
@@ -98,8 +98,8 @@ describe('pip', () => {
     it(`should not use the exchange rate when calculating a pip value`, () => {
       const pipValue = pip()
         .positionSize(1)
-        .currencyPairRate(1.25)
-        .listedSecond(true)
+        .tradingPairExchangeRate(1.25)
+        .baseListedSecond(true)
         .value();
 
       expect(pipValue).to.equal(0.0001);

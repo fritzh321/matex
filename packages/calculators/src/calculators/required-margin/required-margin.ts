@@ -1,10 +1,10 @@
 import { BigNumber } from 'bignumber.js';
-import { BaseCalculator } from './abstract/base';
+import { BaseCalculator } from '../abstract/base';
 
 import {
   initialRequiredMarginCalculatorState,
   RequiredMarginCalculatorState,
-} from '../states/required-margin.state';
+} from '../../states/required-margin.state';
 
 export class RequiredMarginCalculator extends BaseCalculator<
   RequiredMarginCalculatorState,
@@ -14,16 +14,16 @@ export class RequiredMarginCalculator extends BaseCalculator<
     super(initialRequiredMarginCalculatorState);
   }
 
-  public positionSize(size: number) {
-    return this.setValue('size', size);
+  public baseExchangeRate(baseExchangeRate: number) {
+    return this.setValue('baseExchangeRate', baseExchangeRate);
   }
 
   public leverage(leverage: number) {
     return this.setValue('leverage', leverage);
   }
 
-  public accountExchangeRate(rate: number) {
-    return this.setValue('baseRate', rate);
+  public positionSize(positionSize: number) {
+    return this.setValue('positionSize', positionSize);
   }
 
   public value() {
@@ -31,11 +31,11 @@ export class RequiredMarginCalculator extends BaseCalculator<
       return this.result;
     }
 
-    const { size, baseRate, leverage } = this.validState;
+    const { positionSize, baseExchangeRate, leverage } = this.validState;
 
-    return (this.result = new BigNumber(size)
+    return (this.result = new BigNumber(positionSize)
       .dividedBy(leverage)
-      .multipliedBy(baseRate)
+      .multipliedBy(baseExchangeRate)
       .toNumber());
   }
 }

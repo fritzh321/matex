@@ -12,7 +12,7 @@ Feature('Calculating the required margin', () => {
     });
 
     And('the exchange rate for the pair EUR/USD is 1.25', () => {
-      calculator.accountExchangeRate(1.25);
+      calculator.baseExchangeRate(1.25);
     });
 
     And('the position size is 100,000', () => {

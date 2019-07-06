@@ -1,11 +1,11 @@
 export type RequiredMarginCalculatorState = {
-  baseRate: number;
+  baseExchangeRate: number;
   leverage: number;
-  size: number;
+  positionSize: number;
 };
 
 export const initialRequiredMarginCalculatorState: RequiredMarginCalculatorState = {
-  baseRate: 1,
+  baseExchangeRate: 1,
   leverage: 1,
-  size: 0,
+  positionSize: 0,
 };

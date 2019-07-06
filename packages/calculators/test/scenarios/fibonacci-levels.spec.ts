@@ -13,11 +13,11 @@ Feature('Calculating Fibonacci Levels', () => {
     const calculator = fibonacciLevels();
 
     Given('the low price is 1.4', () => {
-      calculator.low(1.4);
+      calculator.lowPrice(1.4);
     });
 
     And('the high price is 1.5', () => {
-      calculator.high(1.5);
+      calculator.highPrice(1.5);
     });
 
     When('the trend is up', () => {
@@ -30,8 +30,10 @@ Feature('Calculating Fibonacci Levels', () => {
       expect(fibonacciLevelsResult).to.deep.equal(
         defaultFibonacciLevelsResultUp,
       );
-      expect(fibonacciLevelsResult.extensions[0].level).to.equal('261.8%');
-      expect(fibonacciLevelsResult.retracements[0].level).to.equal('23.6%');
+      expect(fibonacciLevelsResult.extensionLevels[0].level).to.equal('261.8%');
+      expect(fibonacciLevelsResult.retracementLevels[0].level).to.equal(
+        '23.6%',
+      );
     });
   });
 
@@ -39,11 +41,11 @@ Feature('Calculating Fibonacci Levels', () => {
     const calculator = fibonacciLevels();
 
     Given('the low price is 1.4', () => {
-      calculator.low(1.4);
+      calculator.lowPrice(1.4);
     });
 
     And('the high price is 1.5', () => {
-      calculator.high(1.5);
+      calculator.highPrice(1.5);
     });
 
     When('the trend is down', () => {
@@ -56,8 +58,10 @@ Feature('Calculating Fibonacci Levels', () => {
       expect(fibonacciLevelsResult).to.deep.equal(
         defaultFibonacciLevelsResultDown,
       );
-      expect(fibonacciLevelsResult.extensions[0].level).to.equal('23.6%');
-      expect(fibonacciLevelsResult.retracements[0].level).to.equal('78.6%');
+      expect(fibonacciLevelsResult.extensionLevels[0].level).to.equal('23.6%');
+      expect(fibonacciLevelsResult.retracementLevels[0].level).to.equal(
+        '78.6%',
+      );
     });
   });
 });

@@ -29,7 +29,7 @@ describe('fibonnaciLevels', () => {
   });
 
   describe('#value()', () => {
-    it('should compute the fibonnaci levels extensions and retracements with default values', () => {
+    it('should compute the fibonnaci extension and retracement levels with default values', () => {
       const fibonnaciLevelsResult = fibonacciLevels().value();
       expect(fibonnaciLevelsResult).to.deep.equal(defaultFibonacciLevelsResult);
     });
@@ -39,21 +39,21 @@ describe('fibonnaciLevels', () => {
     });
   });
 
-  describe('#low()', () => {
+  describe('#lowPrice()', () => {
     it(SHOULD_RETURN_CALCULATOR_REFERENCE, () => {
-      expect(calculator.low(5)).to.equal(calculator);
+      expect(calculator.lowPrice(5)).to.equal(calculator);
     });
   });
 
-  describe('#high()', () => {
+  describe('#highPrice()', () => {
     it(SHOULD_RETURN_CALCULATOR_REFERENCE, () => {
-      expect(calculator.high(5)).to.equal(calculator);
+      expect(calculator.highPrice(5)).to.equal(calculator);
     });
   });
 
-  describe('#custom()', () => {
+  describe('#customPrice()', () => {
     it(SHOULD_RETURN_CALCULATOR_REFERENCE, () => {
-      expect(calculator.custom(5)).to.equal(calculator);
+      expect(calculator.customPrice(5)).to.equal(calculator);
     });
   });
 
@@ -63,25 +63,25 @@ describe('fibonnaciLevels', () => {
     });
   });
 
-  describe('#extensions()', () => {
+  describe('#extensionLevels()', () => {
     it(SHOULD_RETURN_CALCULATOR_REFERENCE, () => {
-      expect(calculator.extensions([23.6])).to.equal(calculator);
+      expect(calculator.extensionLevels([23.6])).to.equal(calculator);
     });
 
     it('Should define the extension levels', () => {
-      calculator.extensions([50]);
-      expect(calculator.value().extensions[0].level).to.equal('50%');
+      calculator.extensionLevels([50]);
+      expect(calculator.value().extensionLevels[0].level).to.equal('50%');
     });
   });
 
-  describe('#retracements()', () => {
+  describe('#retracementLevels()', () => {
     it(SHOULD_RETURN_CALCULATOR_REFERENCE, () => {
-      expect(calculator.retracements([23.6])).to.equal(calculator);
+      expect(calculator.retracementLevels([23.6])).to.equal(calculator);
     });
 
-    it('Should define the retracements levels', () => {
-      calculator.retracements([50]);
-      expect(calculator.value().retracements[0].level).to.equal('50%');
+    it('Should define the retracement levels', () => {
+      calculator.retracementLevels([50]);
+      expect(calculator.value().retracementLevels[0].level).to.equal('50%');
     });
   });
 
@@ -92,29 +92,29 @@ describe('fibonnaciLevels', () => {
   });
 
   describe('#valid()', () => {
-    it('Should be valid with no high or low value set', () => {
+    it('Should be valid with no high or low prices value set', () => {
       expect(calculator.valid()).to.equal(true);
     });
 
     it('Should not be valid when only the low price is set', () => {
-      calculator.low(1.25);
+      calculator.lowPrice(1.25);
       expect(calculator.valid()).to.equal(false);
     });
 
     it('Should be valid when only the high price is set', () => {
-      calculator.high(1.25);
+      calculator.highPrice(1.25);
       expect(calculator.valid()).to.equal(true);
     });
 
-    it('Should be valid when low <= high', () => {
-      calculator.high(1.35).low(2);
+    it('Should be valid when low price <= high price', () => {
+      calculator.highPrice(1.35).lowPrice(2);
 
       expect(calculator.valid()).to.equal(false);
 
-      calculator.low(1.25);
+      calculator.lowPrice(1.25);
       expect(calculator.valid()).to.equal(true);
 
-      calculator.low(1.35);
+      calculator.lowPrice(1.35);
       expect(calculator.valid()).to.equal(true);
     });
   });
@@ -126,8 +126,8 @@ describe('fibonnaciLevels', () => {
 
     it('should reset the calculator', () => {
       const fibonnaciLevelsResult = fibonacciLevels()
-        .high(1.35)
-        .low(1.25)
+        .highPrice(1.35)
+        .lowPrice(1.25)
         .reset()
         .value();
 

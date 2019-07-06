@@ -1,6 +1,6 @@
 export type FibonacciLevelsResult = {
-  extensions: FibonacciLevel[];
-  retracements: FibonacciLevel[];
+  retracementLevels: FibonacciLevel[];
+  extensionLevels: FibonacciLevel[];
 };
 
 export type FibonacciLevel = {

@@ -1,19 +1,19 @@
 import { BigNumber } from 'bignumber.js';
-import { TrendEnum } from '../enums/trend.enum';
-import { fibonacciLevelsValidators } from '../validators/fibonacci.validator';
-import { BaseCalculator } from './abstract/base';
+import { TrendEnum } from '../../enums/trend.enum';
+import { fibonacciLevelsValidators } from '../../validators/fibonacci.validator';
+import { BaseCalculator } from '../abstract/base';
 
 import {
   FibonacciLevelsState,
   initialFibonacciLevelsState,
-} from '../states/fibonacci.state';
+} from '../../states/fibonacci.state';
 
 import {
   FibonacciExtensionType,
   FibonacciLevel,
   FibonacciLevelsResult,
   FibonacciRetracementType,
-} from '../types/fibonacci.type';
+} from '../../types/fibonacci.type';
 
 export class FibonacciLevelsCalculator extends BaseCalculator<
   FibonacciLevelsState,
@@ -23,28 +23,34 @@ export class FibonacciLevelsCalculator extends BaseCalculator<
     super(initialFibonacciLevelsState, fibonacciLevelsValidators);
   }
 
-  public custom(custom: number) {
-    return this.setValue('custom', custom);
+  public customPrice(customPrice: number) {
+    return this.setValue('customPrice', customPrice);
   }
 
-  public extensions(extensions: FibonacciExtensionType[]) {
-    return this.setValue('extensions', this.sortNumbers(extensions, false));
+  public extensionLevels(extensionLevels: FibonacciExtensionType[]) {
+    return this.setValue(
+      'extensionLevels',
+      this.sortNumbers(extensionLevels, false),
+    );
   }
 
-  public high(high: number) {
-    return this.setValue('high', high);
+  public highPrice(highPrice: number) {
+    return this.setValue('highPrice', highPrice);
   }
 
-  public low(low: number) {
-    return this.setValue('low', low);
+  public lowPrice(lowPrice: number) {
+    return this.setValue('lowPrice', lowPrice);
   }
 
   public precision(precision: number) {
     return this.setValue('precision', precision);
   }
 
-  public retracements(retracements: FibonacciRetracementType[]) {
-    return this.setValue('retracements', this.sortNumbers(retracements));
+  public retracementLevels(retracementLevels: FibonacciRetracementType[]) {
+    return this.setValue(
+      'retracementLevels',
+      this.sortNumbers(retracementLevels),
+    );
   }
 
   public trend(trend: TrendEnum) {
@@ -57,17 +63,17 @@ export class FibonacciLevelsCalculator extends BaseCalculator<
     }
 
     return (this.result = {
-      extensions: this.computeExtensions(),
-      retracements: this.computeRetracements(),
+      extensionLevels: this.computeExtensions(),
+      retracementLevels: this.computeRetracements(),
     });
   }
 
   private computeExtensions() {
-    const { trend, high, low, extensions } = this.validState;
-    const delta = high - low;
+    const { trend, highPrice, lowPrice, extensionLevels } = this.validState;
+    const delta = highPrice - lowPrice;
 
     if (trend === 'down') {
-      return extensions
+      return extensionLevels
         .slice()
         .reverse()
         .map(level => {
@@ -77,30 +83,30 @@ export class FibonacciLevelsCalculator extends BaseCalculator<
               .dividedBy(100)
               .multipliedBy(delta)
               .negated()
-              .plus(low)
+              .plus(lowPrice)
               .toNumber(),
           );
         });
     }
 
-    return extensions.map(level => {
+    return extensionLevels.map(level => {
       return this.makeFibonacciLevel(
         level,
         new BigNumber(level)
           .dividedBy(100)
           .multipliedBy(delta)
-          .plus(high)
+          .plus(highPrice)
           .toNumber(),
       );
     });
   }
 
   private computeRetracements() {
-    const { trend, high, low, retracements } = this.validState;
-    const delta = high - low;
+    const { trend, highPrice, lowPrice, retracementLevels } = this.validState;
+    const delta = highPrice - lowPrice;
 
     if (trend === 'down') {
-      return retracements
+      return retracementLevels
         .slice()
         .reverse()
         .map(level => {
@@ -109,20 +115,20 @@ export class FibonacciLevelsCalculator extends BaseCalculator<
             new BigNumber(level)
               .dividedBy(100)
               .multipliedBy(delta)
-              .plus(low)
+              .plus(lowPrice)
               .toNumber(),
           );
         });
     }
 
-    return retracements.map(level => {
+    return retracementLevels.map(level => {
       return this.makeFibonacciLevel(
         level,
         new BigNumber(level)
           .dividedBy(100)
           .multipliedBy(delta)
           .negated()
-          .plus(high)
+          .plus(highPrice)
           .toNumber(),
       );
     });

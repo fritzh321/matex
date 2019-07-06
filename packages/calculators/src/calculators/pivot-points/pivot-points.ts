@@ -20,24 +20,24 @@ export class PivotPointsCalculator extends BaseCalculator<
     super(initialPivotPointsState);
   }
 
-  public close(close: number) {
-    return this.setValue('close', close);
+  public closePrice(closePrice: number) {
+    return this.setValue('closePrice', closePrice);
   }
 
-  public high(high: number) {
-    return this.setValue('high', high);
+  public highPrice(highPrice: number) {
+    return this.setValue('highPrice', highPrice);
   }
 
-  public low(low: number) {
-    return this.setValue('low', low);
-  }
-
-  public open(open: number) {
-    return this.setValue('open', open);
+  public lowPrice(lowPrice: number) {
+    return this.setValue('lowPrice', lowPrice);
   }
 
   public method(method: PivotPointsMethodsEnum) {
     return this.setValue('method', method);
+  }
+
+  public openPrice(openPrice: number) {
+    return this.setValue('openPrice', openPrice);
   }
 
   // tslint:disable-next-line: cyclomatic-complexity
@@ -46,25 +46,25 @@ export class PivotPointsCalculator extends BaseCalculator<
       return this.result;
     }
 
-    const { method, close, high, low } = this.validState;
+    const { method, closePrice, highPrice, lowPrice } = this.validState;
     let result: PivotPointsResult;
 
     switch (method) {
       case PivotPointsMethodsEnum.Camarilla:
-        result = pivotPointsCamarilla(high, low, close);
+        result = pivotPointsCamarilla(highPrice, lowPrice, closePrice);
         break;
       case PivotPointsMethodsEnum.DeMark:
-        const { open } = this.validState;
-        result = pivotPointsDeMark(high, low, close, open);
+        const { openPrice } = this.validState;
+        result = pivotPointsDeMark(highPrice, lowPrice, closePrice, openPrice);
         break;
       case PivotPointsMethodsEnum.Fibonacci:
-        result = pivotPointsFibonacci(high, low, close);
+        result = pivotPointsFibonacci(highPrice, lowPrice, closePrice);
         break;
       case PivotPointsMethodsEnum.Woodie:
-        result = pivotPointsWoodie(high, low, close);
+        result = pivotPointsWoodie(highPrice, lowPrice, closePrice);
         break;
       default:
-        result = pivotPointsStandard(high, low, close);
+        result = pivotPointsStandard(highPrice, lowPrice, closePrice);
         break;
     }
 

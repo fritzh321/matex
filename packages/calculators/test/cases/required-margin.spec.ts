@@ -42,7 +42,7 @@ describe('requiredMargin', () => {
 
   describe('#accountBaseRate()', () => {
     it(SHOULD_RETURN_CALCULATOR_REFERENCE, () => {
-      expect(calculator.accountExchangeRate(1.5)).to.equal(calculator);
+      expect(calculator.baseExchangeRate(1.5)).to.equal(calculator);
     });
   });
 
@@ -66,7 +66,7 @@ describe('requiredMargin', () => {
     it(SHOULD_RESET_CALCULATOR, () => {
       const result = requiredMargin()
         .positionSize(1_000)
-        .accountExchangeRate(1.5)
+        .baseExchangeRate(1.5)
         .leverage(5)
         .reset()
         .value();
