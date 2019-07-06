@@ -122,6 +122,6 @@ export class PositionSizeCalculator extends BaseCalculator<
   }
 }
 
-export function positionSize() {
+export const positionSize = () => {
   return new PositionSizeCalculator();
-}
+};

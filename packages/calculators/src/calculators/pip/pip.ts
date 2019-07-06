@@ -1,18 +1,15 @@
 import { BigNumber } from 'bignumber.js';
 
 import {
-  initialPipValueCalculatorState,
-  PipValueCalculatorState,
+  initialPipValueState,
+  PipValueState,
 } from '../../states/pip-value.state';
 
 import { BaseCalculator } from '../abstract/base';
 
-export class PipValueCalculator extends BaseCalculator<
-  PipValueCalculatorState,
-  number
-> {
+export class PipValueCalculator extends BaseCalculator<PipValueState, number> {
   constructor() {
-    super(initialPipValueCalculatorState);
+    super(initialPipValueState);
   }
 
   public baseExchangeRate(baseExchangeRate: number) {
@@ -44,7 +41,7 @@ export class PipValueCalculator extends BaseCalculator<
   }
 }
 
-export const pipValue = (state: PipValueCalculatorState) => {
+export const pipValue = (state: PipValueState) => {
   const {
     baseExchangeRate,
     baseListedSecond,
@@ -62,6 +59,6 @@ export const pipValue = (state: PipValueCalculatorState) => {
     .toNumber();
 };
 
-export function pip() {
+export const pip = () => {
   return new PipValueCalculator();
-}
+};

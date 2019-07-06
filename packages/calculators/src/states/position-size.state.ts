@@ -1,9 +1,6 @@
-import {
-  initialPipValueCalculatorState,
-  PipValueCalculatorState,
-} from './pip-value.state';
+import { initialPipValueState, PipValueState } from './pip-value.state';
 
-export type PositionSizeState = PipValueCalculatorState & {
+export type PositionSizeState = PipValueState & {
   amountAtRisk: number;
   entryPrice: number;
   riskRatio: number;
@@ -12,7 +9,7 @@ export type PositionSizeState = PipValueCalculatorState & {
 };
 
 export const initialPositionSizeState: PositionSizeState = {
-  ...initialPipValueCalculatorState,
+  ...initialPipValueState,
   amountAtRisk: 0,
   entryPrice: 0,
   riskRatio: 0,

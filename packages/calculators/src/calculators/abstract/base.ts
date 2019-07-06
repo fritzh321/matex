@@ -1,4 +1,3 @@
-import { sortNumberAsc, sortNumberDesc } from '../../helpers/sort.helper';
 import { StateValidator } from '../../types/state-validator.type';
 
 export abstract class BaseCalculator<S extends object = {}, R = {}> {
@@ -54,10 +53,6 @@ export abstract class BaseCalculator<S extends object = {}, R = {}> {
     this.checkValidity();
 
     return this;
-  }
-
-  protected sortNumbers(collection: number[], asc = true) {
-    return collection.slice().sort(asc ? sortNumberAsc : sortNumberDesc);
   }
 
   protected checkValidity() {

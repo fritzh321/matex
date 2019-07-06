@@ -1,5 +1,7 @@
 import { BigNumber } from 'bignumber.js';
+
 import { TrendEnum } from '../../enums/trend.enum';
+import { sortNumbers } from '../../helpers/sort.helper';
 import { fibonacciLevelsValidators } from '../../validators/fibonacci.validator';
 import { BaseCalculator } from '../abstract/base';
 
@@ -30,7 +32,7 @@ export class FibonacciLevelsCalculator extends BaseCalculator<
   public extensionLevels(extensionLevels: FibonacciExtensionType[]) {
     return this.setValue(
       'extensionLevels',
-      this.sortNumbers(extensionLevels, false),
+      sortNumbers(extensionLevels, false),
     );
   }
 
@@ -47,10 +49,7 @@ export class FibonacciLevelsCalculator extends BaseCalculator<
   }
 
   public retracementLevels(retracementLevels: FibonacciRetracementType[]) {
-    return this.setValue(
-      'retracementLevels',
-      this.sortNumbers(retracementLevels),
-    );
+    return this.setValue('retracementLevels', sortNumbers(retracementLevels));
   }
 
   public trend(trend: TrendEnum) {
@@ -154,6 +153,6 @@ export class FibonacciLevelsCalculator extends BaseCalculator<
   }
 }
 
-export function fibonacciLevels() {
+export const fibonacciLevels = () => {
   return new FibonacciLevelsCalculator();
-}
+};

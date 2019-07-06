@@ -1,17 +1,18 @@
 import { BigNumber } from 'bignumber.js';
+
 import { BaseCalculator } from '../abstract/base';
 
 import {
-  initialRequiredMarginCalculatorState,
-  RequiredMarginCalculatorState,
+  initialRequiredMarginState,
+  RequiredMarginState,
 } from '../../states/required-margin.state';
 
 export class RequiredMarginCalculator extends BaseCalculator<
-  RequiredMarginCalculatorState,
+  RequiredMarginState,
   number
 > {
   constructor() {
-    super(initialRequiredMarginCalculatorState);
+    super(initialRequiredMarginState);
   }
 
   public baseExchangeRate(baseExchangeRate: number) {
@@ -40,6 +41,6 @@ export class RequiredMarginCalculator extends BaseCalculator<
   }
 }
 
-export function requiredMargin() {
+export const requiredMargin = () => {
   return new RequiredMarginCalculator();
-}
+};

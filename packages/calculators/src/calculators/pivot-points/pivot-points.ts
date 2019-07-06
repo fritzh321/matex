@@ -72,6 +72,6 @@ export class PivotPointsCalculator extends BaseCalculator<
   }
 }
 
-export function pivotPoints() {
+export const pivotPoints = () => {
   return new PivotPointsCalculator();
-}
+};

@@ -1,4 +1,4 @@
-export type PipValueCalculatorState = {
+export type PipValueState = {
   baseExchangeRate: number;
   baseListedSecond: boolean;
   pipPrecision: number;
@@ -6,7 +6,7 @@ export type PipValueCalculatorState = {
   tradingPairExchangeRate: number;
 };
 
-export const initialPipValueCalculatorState: PipValueCalculatorState = {
+export const initialPipValueState: PipValueState = {
   baseExchangeRate: 1,
   baseListedSecond: false,
   pipPrecision: 4,
