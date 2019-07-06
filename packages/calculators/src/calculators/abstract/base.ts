@@ -29,6 +29,17 @@ export abstract class BaseCalculator<S extends object = {}, R = {}> {
     return this.validity;
   }
 
+  public setState(state: S): this {
+    this.result = null;
+    this.state = {
+      ...state,
+    };
+
+    this.checkValidity();
+
+    return this;
+  }
+
   protected setValue(key: keyof S, value: any): this {
     if (typeof value === 'number') {
       value = Math.abs(value);
