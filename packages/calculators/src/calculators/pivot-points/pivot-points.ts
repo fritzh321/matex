@@ -1,4 +1,4 @@
-import { PivotPointsMethodsEnum } from '../../enums/pivot-points-methods.enum';
+import { PivotPointsMethodsEnum } from '../../enums';
 import { PivotPointsResult } from '../../types';
 import { BaseCalculator } from '../abstract/base';
 import { pivotPointsCamarilla } from './pivot-points-camarilla';

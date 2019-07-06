@@ -5,7 +5,7 @@ export type PositionSizeState = PipValueState & {
   entryPrice: number;
   riskRatio: number;
   stopLossPips: number;
-  stopPrice: number;
+  stopLossPrice: number;
 };
 
 export const initialPositionSizeState: PositionSizeState = {
@@ -14,5 +14,5 @@ export const initialPositionSizeState: PositionSizeState = {
   entryPrice: 0,
   riskRatio: 0,
   stopLossPips: 0,
-  stopPrice: 0,
+  stopLossPrice: 0,
 };

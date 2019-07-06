@@ -1,11 +1,11 @@
 import { BigNumber } from 'bignumber.js';
 
+import { BaseCalculator } from '../abstract/base';
+
 import {
   initialPipValueState,
   PipValueState,
 } from '../../states/pip-value.state';
-
-import { BaseCalculator } from '../abstract/base';
 
 export class PipValueCalculator extends BaseCalculator<PipValueState, number> {
   constructor() {

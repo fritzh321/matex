@@ -1,12 +1,12 @@
 import { BigNumber } from 'bignumber.js';
 
+import { BaseCalculator } from '../abstract/base';
+import { pip } from '../pip-value/pip-value';
+
 import {
   initialPositionSizeState,
   PositionSizeState,
 } from '../../states/position-size.state';
-
-import { BaseCalculator } from '../abstract/base';
-import { pip } from '../pip-value/pip-value';
 
 export class PositionSizeCalculator extends BaseCalculator<
   PositionSizeState,
@@ -44,8 +44,8 @@ export class PositionSizeCalculator extends BaseCalculator<
     return this.setValue('stopLossPips', stopLossPips);
   }
 
-  public stopPrice(stopPrice: number) {
-    return this.setValue('stopPrice', stopPrice);
+  public stopLossPrice(stopLossPrice: number) {
+    return this.setValue('stopLossPrice', stopLossPrice);
   }
 
   public tradingPairExchangeRate(tradingPairExchangeRate: number) {
@@ -108,10 +108,10 @@ export class PositionSizeCalculator extends BaseCalculator<
 
   protected computeStopLossPip(pipPrecision = 4) {
     let { stopLossPips = 0 } = this.validState;
-    const { entryPrice, stopPrice } = this.validState;
+    const { entryPrice, stopLossPrice } = this.validState;
 
-    if (!stopLossPips && entryPrice && stopPrice) {
-      const deltaPrice = entryPrice - stopPrice;
+    if (!stopLossPips && entryPrice && stopLossPrice) {
+      const deltaPrice = entryPrice - stopLossPrice;
 
       stopLossPips = new BigNumber(deltaPrice)
         .multipliedBy(new BigNumber(pipPrecision).pow(10))
