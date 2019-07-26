@@ -12,7 +12,7 @@
     ],
     "cyclomatic-complexity": [
       true,
-      5
+      6
     ],
     "deprecation": true,
     "max-file-line-count": [
