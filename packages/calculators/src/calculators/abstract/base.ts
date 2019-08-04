@@ -39,7 +39,7 @@ export abstract class BaseCalculator<S extends object = {}, R = {}> {
     return this;
   }
 
-  protected setValue(key: keyof S, value: any): this {
+  public setValue(key: keyof S, value: any): this {
     if (typeof value === 'number') {
       value = Math.abs(value);
     }

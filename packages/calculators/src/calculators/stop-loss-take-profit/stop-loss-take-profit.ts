@@ -1,82 +1,75 @@
-import { BigNumber } from 'bignumber.js';
-
-import { PositionEnum } from '../../../src';
+import { PositionEnum } from '../../enums';
+import { applyMixins } from '../../helpers/mixin.helper';
+import { TakeProfitState } from '../../states/take-profit.state';
+import { StopLossTakeProfitResult } from '../../types';
 import { BaseCalculator } from '../abstract/base';
+import { PipValueMixin } from '../pip-value/pip-value.mixin';
+import { stopLoss } from './stop-loss';
+import { StopLossMixin } from './stop-loss.mixin';
+import { takeProfit } from './take-profit';
+import { TakeProfitMixin } from './take-profit.mixin';
 
 import {
   initialStopLossTakeProfitState,
   StopLossTakeProfitState,
 } from '../../states/stop-loss-take-profit.state';
 
-export class StopLossTakeProfitCalculator extends BaseCalculator<
-  StopLossTakeProfitState,
-  number
-> {
+export class StopLossTakeProfitCalculator
+  extends BaseCalculator<StopLossTakeProfitState, StopLossTakeProfitResult>
+  implements
+    PipValueMixin<StopLossTakeProfitState>,
+    StopLossMixin<StopLossTakeProfitState>,
+    TakeProfitMixin<TakeProfitState> {
+  public entryPrice: (entryPrice: number) => this;
+
+  public position: (position: PositionEnum) => this;
+
+  public takeProfitAmount: (takeProfitAmount: number) => this;
+
+  public takeProfitPips: (takeProfitPips: number) => this;
+
+  public takeProfitPrice: (takeProfitPrice: number) => this;
+
+  public stopLossAmount: (stopLossAmount: number) => this;
+
+  public stopLossPips: (stopLossPips: number) => this;
+
+  public stopLossPrice: (stopLossPrice: number) => this;
+
+  public baseExchangeRate: (baseExchangeRate: number) => this;
+
+  public baseListedSecond: (baseListedSecond: boolean) => this;
+
+  public pipPrecision: (pipPrecision: number) => this;
+
+  public positionSize: (positionSize: number) => this;
+
+  public tradingPairExchangeRate: (tradingPairExchangeRate: number) => this;
+
   constructor() {
     super(initialStopLossTakeProfitState);
   }
 
-  public baseExchangeRate(baseExchangeRate: number) {
-    return this.setValue('baseExchangeRate', baseExchangeRate);
-  }
-
-  public baseListedSecond(baseListedSecond: boolean) {
-    return this.setValue('baseListedSecond', baseListedSecond);
-  }
-
-  public pipPrecision(pipPrecision: number) {
-    return this.setValue('pipPrecision', pipPrecision);
-  }
-
-  public positionSize(positionSize: number) {
-    return this.setValue('positionSize', positionSize);
-  }
-
-  public tradingPairExchangeRate(tradingPairExchangeRate: number) {
-    return this.setValue('tradingPairExchangeRate', tradingPairExchangeRate);
-  }
-
-  public entryPrice(entryPrice: number) {
-    return this.setValue('entryPrice', entryPrice);
-  }
-
-  public position(position: PositionEnum) {
-    return this.setValue('position', position);
-  }
-
-  public stopLossAmount(stopLossAmount: number) {
-    return this.setValue('stopLossAmount', stopLossAmount);
-  }
-
-  public stopLossPips(stopLossPips: number) {
-    return this.setValue('stopLossPips', stopLossPips);
-  }
-
-  public stopLossPrice(stopLossPrice: number) {
-    return this.setValue('stopLossPrice', stopLossPrice);
-  }
-
-  public takeProfitAmount(takeProfitAmount: number) {
-    return this.setValue('takeProfitAmount', takeProfitAmount);
-  }
-
-  public takeProfitPips(takeProfitPips: number) {
-    return this.setValue('takeProfitPips', takeProfitPips);
-  }
-
-  public takeProfitPrice(takeProfitPrice: number) {
-    return this.setValue('takeProfitPrice', takeProfitPrice);
-  }
-
-  public value(): number {
+  public value(): StopLossTakeProfitResult {
     if (this.result !== null) {
       return this.result;
     }
 
-    // TODO
-    return (this.result = new BigNumber(0).toNumber());
+    const stopLossCalculator = stopLoss();
+    const takeProfitCalculator = takeProfit();
+
+    return {
+      stopLoss: stopLossCalculator.value(),
+      takeProfit: takeProfitCalculator.value(),
+    };
   }
 }
+
+applyMixins(StopLossTakeProfitCalculator, [
+  StopLossMixin,
+  TakeProfitMixin,
+  PipValueMixin,
+]);
 
 export const stopLossTakeProfit = () => {
   return new StopLossTakeProfitCalculator();

@@ -1,25 +1,13 @@
-import { PositionEnum } from '../enums/position.enum';
 import { initialPipValueState, PipValueState } from './pip-value.state';
+import { initialStopLossState, StopLossState } from './stop-loss.state';
+import { initialTakeProfitState, TakeProfitState } from './take-profit.state';
 
-export type StopLossTakeProfitState = PipValueState & {
-  entryPrice: number;
-  position: PositionEnum;
-  stopLossAmount: number;
-  stopLossPips: number;
-  stopLossPrice: number;
-  takeProfitAmount: number;
-  takeProfitPips: number;
-  takeProfitPrice: number;
-};
+export type StopLossTakeProfitState = PipValueState &
+  StopLossState &
+  TakeProfitState;
 
 export const initialStopLossTakeProfitState: StopLossTakeProfitState = {
   ...initialPipValueState,
-  entryPrice: 0,
-  position: PositionEnum.Long,
-  stopLossAmount: 0,
-  stopLossPips: 0,
-  stopLossPrice: 0,
-  takeProfitAmount: 0,
-  takeProfitPips: 0,
-  takeProfitPrice: 0,
+  ...initialStopLossState,
+  ...initialTakeProfitState,
 };

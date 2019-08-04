@@ -1,45 +1,41 @@
 import { BigNumber } from 'bignumber.js';
 
+import { applyMixins } from '../../helpers/mixin.helper';
 import { BaseCalculator } from '../abstract/base';
+import { PipValueMixin } from './pip-value.mixin';
 
 import {
   initialPipValueState,
   PipValueState,
 } from '../../states/pip-value.state';
 
-export class PipValueCalculator extends BaseCalculator<PipValueState, number> {
-  constructor() {
-    super(initialPipValueState);
-  }
+export class PipValueCalculator<S extends PipValueState, R>
+  extends BaseCalculator<S, R>
+  implements PipValueMixin<S> {
+  public baseExchangeRate: (baseExchangeRate: number) => this;
 
-  public baseExchangeRate(baseExchangeRate: number) {
-    return this.setValue('baseExchangeRate', baseExchangeRate);
-  }
+  public baseListedSecond: (baseListedSecond: boolean) => this;
 
-  public baseListedSecond(baseListedSecond: boolean) {
-    return this.setValue('baseListedSecond', baseListedSecond);
-  }
+  public pipPrecision: (pipPrecision: number) => this;
 
-  public pipPrecision(pipPrecision: number) {
-    return this.setValue('pipPrecision', pipPrecision);
-  }
+  public positionSize: (positionSize: number) => this;
 
-  public positionSize(positionSize: number) {
-    return this.setValue('positionSize', positionSize);
-  }
+  public tradingPairExchangeRate: (tradingPairExchangeRate: number) => this;
 
-  public tradingPairExchangeRate(tradingPairExchangeRate: number) {
-    return this.setValue('tradingPairExchangeRate', tradingPairExchangeRate);
-  }
-
-  public value(): number {
+  public value() {
     if (this.result !== null) {
       return this.result;
     }
 
-    return (this.result = pipValue(this.validState));
+    return (this.result = (this.computePipValue() as unknown) as R);
+  }
+
+  protected computePipValue() {
+    return pipValue(this.validState);
   }
 }
+
+applyMixins(PipValueCalculator, [PipValueMixin]);
 
 export const pipValue = (state: PipValueState) => {
   const {
@@ -60,5 +56,5 @@ export const pipValue = (state: PipValueState) => {
 };
 
 export const pip = () => {
-  return new PipValueCalculator();
+  return new PipValueCalculator<PipValueState, number>(initialPipValueState);
 };
