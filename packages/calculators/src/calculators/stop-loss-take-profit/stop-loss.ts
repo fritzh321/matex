@@ -79,19 +79,23 @@ export class StopLossCalculator
     divider: number,
   ): StopLossResult {
     const { position, entryPrice } = this.validState;
-    let stopLossPips = 0;
+    let stopLossPips = new BigNumber(0);
 
     if (position === PositionEnum.Long && stopLossPrice < entryPrice) {
-      stopLossPips = (entryPrice - stopLossPrice) * divider;
+      stopLossPips = new BigNumber(entryPrice)
+        .minus(stopLossPrice)
+        .multipliedBy(divider);
     }
 
     if (position === PositionEnum.Short && stopLossPrice > entryPrice) {
-      stopLossPips = (stopLossPrice - entryPrice) * divider;
+      stopLossPips = new BigNumber(stopLossPrice)
+        .minus(entryPrice)
+        .multipliedBy(divider);
     }
 
     return this.buildStopLossResult(
       this.computeStopLossAmount(stopLossPrice, pipValue),
-      stopLossPips,
+      stopLossPips.toNumber(),
       stopLossPrice,
     );
   }
