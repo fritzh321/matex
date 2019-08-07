@@ -9,9 +9,10 @@ import {
   PipValueState,
 } from '../../states/pip-value.state';
 
-export class PipValueCalculator<S extends PipValueState, R>
-  extends BaseCalculator<S, R>
-  implements PipValueMixin<S> {
+export class PipValueCalculator<
+  S extends PipValueState = PipValueState,
+  R = number
+> extends BaseCalculator<S, R> implements PipValueMixin<S> {
   public baseExchangeRate: (baseExchangeRate: number) => this;
 
   public baseListedSecond: (baseListedSecond: boolean) => this;

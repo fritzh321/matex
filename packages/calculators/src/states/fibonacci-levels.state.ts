@@ -17,7 +17,7 @@ export type FibonacciLevelsState = {
 
 export const initialFibonacciLevelsState: FibonacciLevelsState = {
   customPrice: 0,
-  extensionLevels: [261.8, 200, 161.8, 138.2, 100, 61.8, 50, 38.2, 23.6],
+  extensionLevels: [23.6, 38.2, 50, 61.8, 100, 138.2, 161.8, 200, 261.8],
   highPrice: 0,
   lowPrice: 0,
   precision: 5,

@@ -1,6 +1,6 @@
 import { StateValidator } from '../../types/state-validator.type';
 
-export abstract class BaseCalculator<S extends object = {}, R = {}> {
+export abstract class BaseCalculator<S extends object = {}, R = any> {
   protected state: S;
 
   protected result: R | null = null;
@@ -16,21 +16,23 @@ export abstract class BaseCalculator<S extends object = {}, R = {}> {
     protected validators?: Array<StateValidator<S>>,
   ) {
     this.state = { ...initialState };
+    this.checkValidity();
   }
 
-  public reset() {
+  public reset(): this {
     this.result = null;
     this.state = { ...this.initialState };
     return this;
   }
 
-  public valid() {
+  public isValid() {
     return this.validity;
   }
 
-  public setState(state: S): this {
+  public setState(state: Partial<S>): this {
     this.result = null;
     this.state = {
+      ...this.state,
       ...state,
     };
 
@@ -53,6 +55,10 @@ export abstract class BaseCalculator<S extends object = {}, R = {}> {
     this.checkValidity();
 
     return this;
+  }
+
+  public getValueForKey(key: keyof S): any {
+    return this.state[key];
   }
 
   protected checkValidity() {

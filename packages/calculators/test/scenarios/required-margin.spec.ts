@@ -24,7 +24,7 @@ Feature('Calculating the required margin', () => {
     });
 
     Then('the required margin should be $6,250', () => {
-      expect(calculator.valid()).to.equal(true);
+      expect(calculator.isValid()).to.equal(true);
       expect(calculator.value()).to.equal(6250);
     });
   });
@@ -45,7 +45,7 @@ Feature('Calculating the required margin', () => {
     });
 
     Then('the required margin should be €5000', () => {
-      expect(calculator.valid()).to.equal(true);
+      expect(calculator.isValid()).to.equal(true);
       expect(calculator.value()).to.equal(5000);
     });
   });

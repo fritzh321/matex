@@ -5,10 +5,12 @@ export const fibonacciLevelsValidators: Array<
   StateValidator<FibonacciLevelsState>
 > = [
   (state: FibonacciLevelsState) => {
-    if (state.lowPrice > 0 || state.highPrice > 0) {
-      return state.highPrice >= state.lowPrice;
+    let isValid = state.lowPrice > 0 && state.highPrice > 0;
+
+    if (isValid) {
+      isValid = state.highPrice >= state.lowPrice;
     }
 
-    return true;
+    return isValid;
   },
 ];

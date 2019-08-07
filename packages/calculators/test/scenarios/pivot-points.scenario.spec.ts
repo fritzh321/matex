@@ -45,7 +45,7 @@ Feature('Calculating the pivot points', () => {
     });
 
     Then(COMPUTE_RIGHT_VALUES, () => {
-      expect(calculator.valid()).to.equal(true);
+      expect(calculator.isValid()).to.equal(true);
       expect(calculator.value()).to.deep.equal(PIVOT_POINTS_WOODIE_RESULTS);
     });
   });
@@ -75,7 +75,7 @@ Feature('Calculating the pivot points', () => {
     });
 
     Then(COMPUTE_RIGHT_VALUES, () => {
-      expect(calculator.valid()).to.equal(true);
+      expect(calculator.isValid()).to.equal(true);
       expect(calculator.value()).to.deep.equal(
         PIVOT_POINTS_DEMARK_RESULTS_CLOSE_GREATER_OPEN,
       );
@@ -107,7 +107,7 @@ Feature('Calculating the pivot points', () => {
     });
 
     Then(COMPUTE_RIGHT_VALUES, () => {
-      expect(calculator.valid()).to.equal(true);
+      expect(calculator.isValid()).to.equal(true);
       expect(calculator.value()).to.deep.equal(
         PIVOT_POINTS_DEMARK_RESULTS_OPEN_GREATER_CLOSE,
       );
@@ -139,7 +139,7 @@ Feature('Calculating the pivot points', () => {
     });
 
     Then(COMPUTE_RIGHT_VALUES, () => {
-      expect(calculator.valid()).to.equal(true);
+      expect(calculator.isValid()).to.equal(true);
       expect(calculator.value()).to.deep.equal(PIVOT_POINTS_DEMARK_RESULTS);
     });
   });
@@ -165,7 +165,7 @@ Feature('Calculating the pivot points', () => {
     });
 
     Then(COMPUTE_RIGHT_VALUES, () => {
-      expect(calculator.valid()).to.equal(true);
+      expect(calculator.isValid()).to.equal(true);
       expect(calculator.value()).to.deep.equal(PIVOT_POINTS_STANDARD);
     });
   });
@@ -191,7 +191,7 @@ Feature('Calculating the pivot points', () => {
     });
 
     Then(COMPUTE_RIGHT_VALUES, () => {
-      expect(calculator.valid()).to.equal(true);
+      expect(calculator.isValid()).to.equal(true);
       expect(calculator.value()).to.deep.equal(PIVOT_POINTS_FIBONACCI);
     });
   });
@@ -217,7 +217,7 @@ Feature('Calculating the pivot points', () => {
     });
 
     Then(COMPUTE_RIGHT_VALUES, () => {
-      expect(calculator.valid()).to.equal(true);
+      expect(calculator.isValid()).to.equal(true);
       expect(calculator.value()).to.deep.equal(PIVOT_POINTS_CAMARILLA);
     });
   });

@@ -25,7 +25,7 @@ Feature('Calculating Fibonacci Levels', () => {
     });
 
     Then('the fibonacci levels should be valid', () => {
-      expect(calculator.valid()).to.equal(true);
+      expect(calculator.isValid()).to.equal(true);
       const fibonacciLevelsResult = calculator.value();
       expect(fibonacciLevelsResult).to.deep.equal(
         defaultFibonacciLevelsResultUp,
@@ -53,7 +53,7 @@ Feature('Calculating Fibonacci Levels', () => {
     });
 
     Then('the fibonacci levels should be valid', () => {
-      expect(calculator.valid()).to.equal(true);
+      expect(calculator.isValid()).to.equal(true);
       const fibonacciLevelsResult = calculator.value();
       expect(fibonacciLevelsResult).to.deep.equal(
         defaultFibonacciLevelsResultDown,

@@ -61,7 +61,7 @@ export class PositionSizeCalculator extends BaseCalculator<
       return this.result;
     }
 
-    if (this.valid()) {
+    if (this.isValid()) {
       return new BigNumber(this.computeAmountAtRisk())
         .dividedBy(new BigNumber(this.computePipValue()).multipliedBy(2))
         .toNumber();
