@@ -11,7 +11,6 @@ import {
   SHOULD_MEMOIZE_LAST_VALUE,
   SHOULD_RETURN_CALCULATOR_INSTANCE,
   SHOULD_RETURN_CALCULATOR_PROPERTY_STATE_VALUE,
-  SHOULD_RETURN_CALCULATOR_REFERENCE,
   SHOULD_RETURN_DEFAULT_RESULT,
   SHOULD_RETURN_REFERENCE_CALCULATOR,
   SHOULD_UPDATE_CALCULATOR_PROPERTY_STATE,
@@ -82,7 +81,7 @@ describe('FibonacciLevelsCalculator', () => {
   });
 
   describe('#lowPrice()', () => {
-    it(SHOULD_RETURN_CALCULATOR_REFERENCE, () => {
+    it(SHOULD_RETURN_REFERENCE_CALCULATOR, () => {
       expect(calculator.lowPrice(5)).to.equal(calculator);
     });
 
@@ -93,7 +92,7 @@ describe('FibonacciLevelsCalculator', () => {
   });
 
   describe('#highPrice()', () => {
-    it(SHOULD_RETURN_CALCULATOR_REFERENCE, () => {
+    it(SHOULD_RETURN_REFERENCE_CALCULATOR, () => {
       expect(calculator.highPrice(5)).to.equal(calculator);
     });
 
@@ -104,7 +103,7 @@ describe('FibonacciLevelsCalculator', () => {
   });
 
   describe('#customPrice()', () => {
-    it(SHOULD_RETURN_CALCULATOR_REFERENCE, () => {
+    it(SHOULD_RETURN_REFERENCE_CALCULATOR, () => {
       expect(calculator.customPrice(5)).to.equal(calculator);
     });
 
@@ -115,7 +114,7 @@ describe('FibonacciLevelsCalculator', () => {
   });
 
   describe('#precision()', () => {
-    it(SHOULD_RETURN_CALCULATOR_REFERENCE, () => {
+    it(SHOULD_RETURN_REFERENCE_CALCULATOR, () => {
       expect(calculator.precision(5)).to.equal(calculator);
     });
 
@@ -141,7 +140,7 @@ describe('FibonacciLevelsCalculator', () => {
   });
 
   describe('#extensionLevels()', () => {
-    it(SHOULD_RETURN_CALCULATOR_REFERENCE, () => {
+    it(SHOULD_RETURN_REFERENCE_CALCULATOR, () => {
       expect(calculator.extensionLevels([23.6])).to.equal(calculator);
     });
 
@@ -160,7 +159,7 @@ describe('FibonacciLevelsCalculator', () => {
   });
 
   describe('#retracementLevels()', () => {
-    it(SHOULD_RETURN_CALCULATOR_REFERENCE, () => {
+    it(SHOULD_RETURN_REFERENCE_CALCULATOR, () => {
       expect(calculator.retracementLevels([23.6])).to.equal(calculator);
     });
 
@@ -179,7 +178,7 @@ describe('FibonacciLevelsCalculator', () => {
   });
 
   describe('#trend()', () => {
-    it(SHOULD_RETURN_CALCULATOR_REFERENCE, () => {
+    it(SHOULD_RETURN_REFERENCE_CALCULATOR, () => {
       expect(calculator.trend(TrendEnum.Up)).to.equal(calculator);
     });
 
@@ -253,7 +252,7 @@ describe('FibonacciLevelsCalculator', () => {
   });
 
   describe('#reset()', () => {
-    it(SHOULD_RETURN_CALCULATOR_REFERENCE, () => {
+    it(SHOULD_RETURN_REFERENCE_CALCULATOR, () => {
       expect(calculator.reset()).to.equal(calculator);
     });
 

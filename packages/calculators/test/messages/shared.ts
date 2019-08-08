@@ -1,6 +1,3 @@
-export const SHOULD_RETURN_CALCULATOR_REFERENCE =
-  'should return the reference of the calculator';
-
 export const SHOULD_RESET_CALCULATOR = 'should reset the calculator';
 
 export const SHOULD_MEMOIZE_LAST_VALUE = 'should memoize last value';

@@ -81,6 +81,10 @@ describe('pip', () => {
   });
 
   describe('#positionSize()', () => {
+    it(SHOULD_RETURN_REFERENCE_CALCULATOR, () => {
+      expect(calculator.reset()).to.equal(calculator);
+    });
+
     it('should define the position size when calculating a pip value', () => {
       let pipValue = calculator.positionSize(1).value();
 
@@ -95,6 +99,10 @@ describe('pip', () => {
   });
 
   describe('#pipPrecision()', () => {
+    it(SHOULD_RETURN_REFERENCE_CALCULATOR, () => {
+      expect(calculator.reset()).to.equal(calculator);
+    });
+
     it('should define the pip precision when calculating a pip value', () => {
       let pipValue = calculator
         .positionSize(1)
@@ -115,6 +123,10 @@ describe('pip', () => {
   });
 
   describe('#currencyPairRate()', () => {
+    it(SHOULD_RETURN_REFERENCE_CALCULATOR, () => {
+      expect(calculator.reset()).to.equal(calculator);
+    });
+
     it('should define the exchange rate of the currency pair when calculating a pip value', () => {
       let pipValue = calculator
         .positionSize(1)
@@ -137,6 +149,10 @@ describe('pip', () => {
   });
 
   describe('#accountBaseRate()', () => {
+    it(SHOULD_RETURN_REFERENCE_CALCULATOR, () => {
+      expect(calculator.reset()).to.equal(calculator);
+    });
+
     it(`should define the exchange rate between the account currency and
     the base currency when calculating a pip value`, () => {
       let pipValue = calculator
@@ -158,6 +174,10 @@ describe('pip', () => {
   });
 
   describe('#accountCurrencyListedSecond()', () => {
+    it(SHOULD_RETURN_REFERENCE_CALCULATOR, () => {
+      expect(calculator.reset()).to.equal(calculator);
+    });
+
     it(`should not use the exchange rate when calculating a pip value`, () => {
       const pipValue = calculator
         .positionSize(1)
