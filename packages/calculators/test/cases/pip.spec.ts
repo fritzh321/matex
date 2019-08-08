@@ -82,7 +82,7 @@ describe('pip', () => {
 
   describe('#positionSize()', () => {
     it(SHOULD_RETURN_REFERENCE_CALCULATOR, () => {
-      expect(calculator.reset()).to.equal(calculator);
+      expect(calculator.positionSize(1_000)).to.equal(calculator);
     });
 
     it('should define the position size when calculating a pip value', () => {
@@ -91,16 +91,16 @@ describe('pip', () => {
       expect(calculator.getValueForKey('positionSize')).to.equal(1);
       expect(pipValue).to.equal(0.0001);
 
-      pipValue = calculator.positionSize(1000).value();
+      pipValue = calculator.positionSize(1_000).value();
 
-      expect(calculator.getValueForKey('positionSize')).to.equal(1000);
+      expect(calculator.getValueForKey('positionSize')).to.equal(1_000);
       expect(pipValue).to.equal(0.1);
     });
   });
 
   describe('#pipPrecision()', () => {
     it(SHOULD_RETURN_REFERENCE_CALCULATOR, () => {
-      expect(calculator.reset()).to.equal(calculator);
+      expect(calculator.pipPrecision(5)).to.equal(calculator);
     });
 
     it('should define the pip precision when calculating a pip value', () => {
@@ -122,9 +122,9 @@ describe('pip', () => {
     });
   });
 
-  describe('#currencyPairRate()', () => {
+  describe('#tradingPairExchangeRate()', () => {
     it(SHOULD_RETURN_REFERENCE_CALCULATOR, () => {
-      expect(calculator.reset()).to.equal(calculator);
+      expect(calculator.tradingPairExchangeRate(1)).to.equal(calculator);
     });
 
     it('should define the exchange rate of the currency pair when calculating a pip value', () => {
@@ -148,9 +148,9 @@ describe('pip', () => {
     });
   });
 
-  describe('#accountBaseRate()', () => {
+  describe('#baseExchangeRate()', () => {
     it(SHOULD_RETURN_REFERENCE_CALCULATOR, () => {
-      expect(calculator.reset()).to.equal(calculator);
+      expect(calculator.baseExchangeRate(1.2)).to.equal(calculator);
     });
 
     it(`should define the exchange rate between the account currency and
@@ -173,9 +173,9 @@ describe('pip', () => {
     });
   });
 
-  describe('#accountCurrencyListedSecond()', () => {
+  describe('#baseListedSecond()', () => {
     it(SHOULD_RETURN_REFERENCE_CALCULATOR, () => {
-      expect(calculator.reset()).to.equal(calculator);
+      expect(calculator.baseListedSecond(false)).to.equal(calculator);
     });
 
     it(`should not use the exchange rate when calculating a pip value`, () => {
@@ -191,6 +191,10 @@ describe('pip', () => {
   });
 
   describe('#reset()', () => {
+    it(SHOULD_RETURN_REFERENCE_CALCULATOR, () => {
+      expect(calculator.reset()).to.equal(calculator);
+    });
+
     it('should reset the calculator', () => {
       const pipValue = calculator
         .positionSize(1000)
