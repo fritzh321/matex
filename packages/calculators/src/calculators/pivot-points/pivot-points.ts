@@ -1,5 +1,6 @@
 import { PivotPointsMethodsEnum } from '../../enums';
 import { PivotPointsResult } from '../../types';
+import { pivotPointsValidators } from '../../validators/pivot-points.validator';
 import { BaseCalculator } from '../abstract/base';
 import { pivotPointsCamarilla } from './pivot-points-camarilla';
 import { pivotPointsDeMark } from './pivot-points-demark';
@@ -17,7 +18,7 @@ export class PivotPointsCalculator extends BaseCalculator<
   PivotPointsResult
 > {
   constructor() {
-    super(initialPivotPointsState);
+    super(initialPivotPointsState, pivotPointsValidators);
   }
 
   public closePrice(closePrice: number) {
