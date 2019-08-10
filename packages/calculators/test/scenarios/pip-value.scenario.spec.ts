@@ -35,7 +35,7 @@ Feature('Calculating Pip Value', () => {
       expect(typeof calculator).to.equal('object');
     });
 
-    And('USD is listed first in the pair EUR/CAD', () => {
+    And('EUR is listed first in the pair EUR/CAD', () => {
       calculator.baseListedSecond(false); // default value
     });
 

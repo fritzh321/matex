@@ -14,7 +14,7 @@ import {
   SHOULD_UPDATE_CALCULATOR_STATE,
 } from '../messages/shared';
 
-describe('pip', () => {
+describe('PipValueCalculator', () => {
   let calculator: PipValueCalculator;
 
   beforeEach(() => {

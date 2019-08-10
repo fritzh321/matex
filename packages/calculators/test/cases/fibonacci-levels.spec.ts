@@ -221,7 +221,7 @@ describe('FibonacciLevelsCalculator', () => {
   });
 
   describe('#isValid()', () => {
-    it('Should not be valid with no high or low prices value set', () => {
+    it('Should not be valid when no high and low prices are set', () => {
       expect(calculator.isValid()).to.equal(false);
 
       calculator.highPrice(0).lowPrice(0);
@@ -238,7 +238,7 @@ describe('FibonacciLevelsCalculator', () => {
       expect(calculator.isValid()).to.equal(false);
     });
 
-    it('Should be valid when low price <= high price', () => {
+    it('Should be valid when: low price <= high price', () => {
       calculator.highPrice(1.35).lowPrice(2);
 
       expect(calculator.isValid()).to.equal(false);
