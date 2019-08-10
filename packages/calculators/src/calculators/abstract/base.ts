@@ -22,6 +22,9 @@ export abstract class BaseCalculator<S extends object = {}, R = any> {
   public reset(): this {
     this.result = null;
     this.state = { ...this.initialState };
+
+    this.checkValidity();
+
     return this;
   }
 
