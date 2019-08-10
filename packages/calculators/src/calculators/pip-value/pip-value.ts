@@ -47,7 +47,9 @@ export const pipValue = (state: PipValueState) => {
     tradingPairExchangeRate,
   } = state;
 
-  const decimalPip = new BigNumber(1).dividedBy(Math.pow(10, pipPrecision));
+  const decimalPip = new BigNumber(1).dividedBy(
+    new BigNumber(10).pow(pipPrecision),
+  );
 
   return decimalPip
     .dividedBy(baseListedSecond ? 1 : tradingPairExchangeRate)
