@@ -44,7 +44,7 @@ export class StopLossCalculator
       stopLossPrice,
     } = this.validState;
 
-    const divider = new BigNumber(pipPrecision).pow(pipPrecision).toNumber();
+    const divider = new BigNumber(10).pow(pipPrecision).toNumber();
 
     if (stopLossAmount) {
       return this.computeStopLossWithAmount(stopLossAmount, pipValue, divider);
