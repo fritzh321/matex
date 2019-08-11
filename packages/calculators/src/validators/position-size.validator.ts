@@ -1,9 +1,11 @@
 import { PositionSizeState } from '../states';
 import { StateValidator } from '../types';
+import { pipValueValidators } from './pip-value.validator';
 
 export const positionSizeValidators: Array<
   StateValidator<PositionSizeState>
 > = [
+  ...pipValueValidators,
   state => state.accountSize > 0,
   state => !!state.amountAtRisk || !!state.riskRatio,
   state => {

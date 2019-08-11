@@ -7,9 +7,9 @@ export type PipValueState = {
 };
 
 export const initialPipValueState: PipValueState = {
-  baseExchangeRate: 1,
+  baseExchangeRate: 0,
   baseListedSecond: false,
   pipPrecision: 4,
   positionSize: 0,
-  tradingPairExchangeRate: 1,
+  tradingPairExchangeRate: 0,
 };

@@ -65,12 +65,20 @@ describe('PositionSizeCalculator', () => {
     });
 
     it('Should be valid when the account size and the amount at risk are set', () => {
-      calculator.accountSize(5_000).amountAtRisk(50);
+      calculator
+        .accountSize(5_000)
+        .tradingPairExchangeRate(1)
+        .amountAtRisk(50);
+      
       expect(calculator.isValid()).to.equal(true);
     });
 
     it('Should be valid when the account size and the risk ratio are set', () => {
-      calculator.accountSize(5_000).riskRatio(1);
+      calculator
+        .accountSize(5_000)
+        .riskRatio(1)
+        .tradingPairExchangeRate(1);
+      
       expect(calculator.isValid()).to.equal(true);
     });
 
@@ -151,7 +159,9 @@ describe('PositionSizeCalculator', () => {
       const results = calculator
         .accountSize(5_000)
         .riskRatio(1)
+        .tradingPairExchangeRate(1)
         .value();
+      
       expect(results).to.deep.equal(DEFAULT_PARTIAL_RESULTS);
     });
 
@@ -159,6 +169,7 @@ describe('PositionSizeCalculator', () => {
       const results = calculator
         .accountSize(5_000)
         .amountAtRisk(50)
+        .tradingPairExchangeRate(1)
         .value();
       expect(results).to.deep.equal(DEFAULT_PARTIAL_RESULTS);
     });
@@ -168,6 +179,7 @@ describe('PositionSizeCalculator', () => {
         .accountSize(5_000)
         .riskRatio(1)
         .entryPrice(1.02)
+        .tradingPairExchangeRate(1)
         .value();
       expect(results).to.deep.equal(DEFAULT_PARTIAL_RESULTS);
     });
@@ -177,6 +189,7 @@ describe('PositionSizeCalculator', () => {
         .accountSize(5_000)
         .riskRatio(1)
         .stopLossPrice(1)
+        .tradingPairExchangeRate(1)
         .value();
       expect(results).to.deep.equal(DEFAULT_PARTIAL_RESULTS);
     });
@@ -187,6 +200,7 @@ describe('PositionSizeCalculator', () => {
         .riskRatio(1)
         .stopLossPrice(1)
         .entryPrice(1.02)
+        .tradingPairExchangeRate(1)
         .value();
       expect(results).to.deep.equal(DEFAULT_POSITION_SIZE_RESULTS);
     });
@@ -366,6 +380,7 @@ describe('PositionSizeCalculator', () => {
     it('should reset the calculator', () => {
       const results = calculator
         .accountSize(1_000)
+        .tradingPairExchangeRate(1)
         .riskRatio(5)
         .reset()
         .value();

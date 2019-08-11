@@ -1,6 +1,8 @@
 import { BigNumber } from 'bignumber.js';
 
 import { applyMixins } from '../../helpers/mixin.helper';
+import { StateValidator } from '../../types';
+import { pipValueValidators } from '../../validators/pip-value.validator';
 import { BaseCalculator } from '../abstract/base';
 import { PipValueMixin } from './pip-value.mixin';
 
@@ -21,6 +23,13 @@ export class PipValueCalculator<
 
   public tradingPairExchangeRate: (tradingPairExchangeRate: number) => this;
 
+  constructor(
+    protected initialState: S = initialPipValueState as S,
+    protected validators: Array<StateValidator<S>> = pipValueValidators,
+  ) {
+    super(initialState, validators);
+  }
+
   public value() {
     if (this.result !== null) {
       return this.result;
@@ -34,7 +43,11 @@ export class PipValueCalculator<
   }
 
   protected computePipValue() {
-    return pipValue(this.validState);
+    if (this.isValid()) {
+      return pipValue(this.validState);
+    }
+
+    return 0;
   }
 }
 
@@ -55,11 +68,11 @@ export const pipValue = (state: PipValueState) => {
 
   return decimalPip
     .dividedBy(baseListedSecond ? 1 : tradingPairExchangeRate)
-    .dividedBy(baseExchangeRate)
+    .dividedBy(baseExchangeRate || 1)
     .multipliedBy(positionSize)
     .toNumber();
 };
 
 export const pip = () => {
-  return new PipValueCalculator<PipValueState, number>(initialPipValueState);
+  return new PipValueCalculator();
 };

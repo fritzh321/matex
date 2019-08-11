@@ -14,6 +14,7 @@ import {
   SHOULD_UPDATE_CALCULATOR_STATE,
 } from '../messages/shared';
 
+// tslint:disable-next-line:no-big-function
 describe('PipValueCalculator', () => {
   let calculator: PipValueCalculator;
 
@@ -30,6 +31,21 @@ describe('PipValueCalculator', () => {
 
   describe('#isValid()', () => {
     it(SHOULD_RETURN_CALCULATOR_VALIDITY, () => {
+      expect(calculator.isValid()).to.equal(false);
+    });
+
+    it('Should not be valid when only the position size is set', () => {
+      calculator.positionSize(5_000);
+      expect(calculator.isValid()).to.equal(false);
+    });
+
+    it('Should not be valid when only the tradingPairExchangeRate is set', () => {
+      calculator.tradingPairExchangeRate(1.5);
+      expect(calculator.isValid()).to.equal(false);
+    });
+
+    it('Should be valid when only the position size and the base exchange rate are set', () => {
+      calculator.positionSize(5_000).tradingPairExchangeRate(1.5);
       expect(calculator.isValid()).to.equal(true);
     });
   });
@@ -86,7 +102,10 @@ describe('PipValueCalculator', () => {
     });
 
     it('should define the position size when calculating a pip value', () => {
-      let pipValue = calculator.positionSize(1).value();
+      let pipValue = calculator
+        .positionSize(1)
+        .tradingPairExchangeRate(1)
+        .value();
 
       expect(calculator.getValueForKey('positionSize')).to.equal(1);
       expect(pipValue).to.equal(0.0001);
@@ -106,6 +125,7 @@ describe('PipValueCalculator', () => {
     it('should define the pip precision when calculating a pip value', () => {
       let pipValue = calculator
         .positionSize(1)
+        .tradingPairExchangeRate(1)
         .pipPrecision(4)
         .value();
 
@@ -114,6 +134,7 @@ describe('PipValueCalculator', () => {
 
       pipValue = calculator
         .positionSize(1)
+        .tradingPairExchangeRate(1)
         .pipPrecision(2)
         .value();
 
@@ -157,6 +178,7 @@ describe('PipValueCalculator', () => {
     the base currency when calculating a pip value`, () => {
       let pipValue = calculator
         .positionSize(1)
+        .tradingPairExchangeRate(1)
         .baseExchangeRate(1.25)
         .value();
 
@@ -165,6 +187,7 @@ describe('PipValueCalculator', () => {
 
       pipValue = calculator
         .positionSize(1)
+        .tradingPairExchangeRate(1)
         .baseExchangeRate(2)
         .value();
 
@@ -183,6 +206,7 @@ describe('PipValueCalculator', () => {
         .positionSize(1)
         .tradingPairExchangeRate(1.25)
         .baseListedSecond(true)
+        .baseExchangeRate(1)
         .value();
 
       expect(calculator.getValueForKey('baseListedSecond')).to.equal(true);
@@ -198,6 +222,7 @@ describe('PipValueCalculator', () => {
     it('should reset the calculator', () => {
       const pipValue = calculator
         .positionSize(1000)
+        .tradingPairExchangeRate(1)
         .reset()
         .value();
 
