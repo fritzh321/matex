@@ -10,6 +10,10 @@ import { takeProfit } from './take-profit';
 import { TakeProfitMixin } from './take-profit.mixin';
 
 import {
+  stopLossTakeProfitValidators
+} from '../../validators/stop-loss-take-profit.validator'
+
+import {
   initialStopLossTakeProfitState,
   StopLossTakeProfitState,
 } from '../../states/stop-loss-take-profit.state';
@@ -47,7 +51,7 @@ export class StopLossTakeProfitCalculator
   public tradingPairExchangeRate: (tradingPairExchangeRate: number) => this;
 
   constructor() {
-    super(initialStopLossTakeProfitState);
+    super(initialStopLossTakeProfitState, stopLossTakeProfitValidators);
   }
 
   public value(): StopLossTakeProfitResult {
@@ -58,10 +62,10 @@ export class StopLossTakeProfitCalculator
     const stopLossCalculator = stopLoss();
     const takeProfitCalculator = takeProfit();
 
-    return {
+    return (this.result = {
       stopLoss: stopLossCalculator.value(),
       takeProfit: takeProfitCalculator.value(),
-    };
+    });
   }
 }
 
