@@ -19,8 +19,6 @@ export class PipValueCalculator<
 
   public pipPrecision: (pipPrecision: number) => this;
 
-  public positionSize: (positionSize: number) => this;
-
   public tradingPairExchangeRate: (tradingPairExchangeRate: number) => this;
 
   public value() {
@@ -29,6 +27,10 @@ export class PipValueCalculator<
     }
 
     return (this.result = (this.computePipValue() as unknown) as R);
+  }
+
+  public positionSize(positionSize: number) {
+    return this.setValue('positionSize', positionSize);
   }
 
   protected computePipValue() {

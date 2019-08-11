@@ -3,8 +3,7 @@ import { BigNumber } from 'bignumber.js';
 import { applyMixins } from '../../helpers/mixin.helper';
 import { PositionSizeResult } from '../../types';
 import { positionSizeValidators } from '../../validators/position-size.validator';
-import { BaseCalculator } from '../abstract/base';
-import { pip } from '../pip-value/pip-value';
+import { PipValueCalculator } from '../pip-value/pip-value';
 import { PipValueMixin } from '../pip-value/pip-value.mixin';
 
 import {
@@ -20,7 +19,7 @@ export const DEFAULT_RESULTS: PositionSizeResult = {
 };
 
 export class PositionSizeCalculator
-  extends BaseCalculator<PositionSizeState, PositionSizeResult>
+  extends PipValueCalculator<PositionSizeState, PositionSizeResult>
   implements PipValueMixin<PositionSizeState> {
   public baseExchangeRate: (baseExchangeRate: number) => this;
 
@@ -116,26 +115,6 @@ export class PositionSizeCalculator
     }
 
     return riskRatio;
-  }
-
-  protected computePipValue() {
-    const {
-      baseExchangeRate,
-      baseListedSecond,
-      pipPrecision,
-      positionSize: size,
-      tradingPairExchangeRate,
-    } = this.state;
-
-    return pip()
-      .setState({
-        baseExchangeRate,
-        baseListedSecond,
-        pipPrecision,
-        positionSize: size,
-        tradingPairExchangeRate,
-      })
-      .value();
   }
 
   protected computeAmountAtRisk() {

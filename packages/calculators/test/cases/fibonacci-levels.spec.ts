@@ -19,6 +19,7 @@ import {
 
 import { defaultFibonacciLevelsResult } from '../samples/fibonacci-levels.sample';
 
+// tslint:disable-next-line:no-big-function
 describe('FibonacciLevelsCalculator', () => {
   let calculator: FibonacciLevelsCalculator;
 

@@ -24,6 +24,7 @@ const DEFAULT_RESULTS = {
   supports: [0, 0, 0],
 };
 
+// tslint:disable-next-line:no-big-function
 describe('PivotPointsCalculator', () => {
   let calculator: PivotPointsCalculator;
 

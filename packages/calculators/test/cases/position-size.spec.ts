@@ -29,6 +29,7 @@ const DEFAULT_PARTIAL_RESULTS = {
   riskRatio: 1,
 };
 
+// tslint:disable-next-line:no-big-function
 describe('PositionSizeCalculator', () => {
   let calculator: PositionSizeCalculator;
 
@@ -372,4 +373,5 @@ describe('PositionSizeCalculator', () => {
       expect(results).to.deep.equal(DEFAULT_RESULTS);
     });
   });
+  // tslint:disable-next-line:max-file-line-count
 });
