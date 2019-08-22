@@ -69,7 +69,7 @@ describe('PositionSizeCalculator', () => {
         .accountSize(5_000)
         .tradingPairExchangeRate(1)
         .amountAtRisk(50);
-      
+
       expect(calculator.isValid()).to.equal(true);
     });
 
@@ -78,7 +78,7 @@ describe('PositionSizeCalculator', () => {
         .accountSize(5_000)
         .riskRatio(1)
         .tradingPairExchangeRate(1);
-      
+
       expect(calculator.isValid()).to.equal(true);
     });
 
@@ -161,7 +161,7 @@ describe('PositionSizeCalculator', () => {
         .riskRatio(1)
         .tradingPairExchangeRate(1)
         .value();
-      
+
       expect(results).to.deep.equal(DEFAULT_PARTIAL_RESULTS);
     });
 

@@ -7,6 +7,8 @@ export type StopLossResult = {
 export type TakeProfitResult = StopLossResult;
 
 export type StopLossTakeProfitResult = {
+  pipValue: number;
+  riskRewardRatio: number;
   stopLoss: StopLossResult;
   takeProfit: TakeProfitResult;
 };

@@ -27,12 +27,15 @@ export class StopLossCalculator
     super(initialStopLossState);
   }
 
-  public value(): StopLossResult {
+  public value(pipValue?: number): StopLossResult {
     if (this.result !== null) {
       return this.result;
     }
 
-    const pipValue = this.computePipValue();
+    if (!pipValue) {
+      pipValue = this.computePipValue();
+    }
+
     return (this.result = this.computeStopLossLevels(pipValue));
   }
 
@@ -79,23 +82,25 @@ export class StopLossCalculator
     divider: number,
   ): StopLossResult {
     const { position, entryPrice } = this.validState;
-    let stopLossPips = new BigNumber(0);
+    let stopLossPips = 0;
 
     if (position === PositionEnum.Long && stopLossPrice < entryPrice) {
       stopLossPips = new BigNumber(entryPrice)
         .minus(stopLossPrice)
-        .multipliedBy(divider);
+        .multipliedBy(divider)
+        .toNumber();
     }
 
     if (position === PositionEnum.Short && stopLossPrice > entryPrice) {
       stopLossPips = new BigNumber(stopLossPrice)
         .minus(entryPrice)
-        .multipliedBy(divider);
+        .multipliedBy(divider)
+        .toNumber();
     }
 
     return this.buildStopLossResult(
-      this.computeStopLossAmount(stopLossPrice, pipValue),
-      stopLossPips.toNumber(),
+      this.computeStopLossAmount(stopLossPips, pipValue),
+      stopLossPips,
       stopLossPrice,
     );
   }
@@ -108,13 +113,14 @@ export class StopLossCalculator
     const stopLossPrice = this.computeStopLossPrice(stopLossPips, divider);
 
     return this.buildStopLossResult(
-      this.computeStopLossAmount(stopLossPrice, pipValue),
+      this.computeStopLossAmount(stopLossPips, pipValue),
       stopLossPips,
       stopLossPrice,
     );
   }
-  private computeStopLossAmount(stopLossPrice: number, pipValue: number) {
-    return new BigNumber(stopLossPrice).multipliedBy(pipValue).toNumber();
+
+  private computeStopLossAmount(stopLossPips: number, pipValue: number) {
+    return new BigNumber(stopLossPips).multipliedBy(pipValue).toNumber();
   }
 
   private computeStopLossPrice(stopLossPips: number, divider: number) {

@@ -28,12 +28,15 @@ export class TakeProfitCalculator
     super(initialTakeProfitState);
   }
 
-  public value(): TakeProfitResult {
+  public value(pipValue?: number): TakeProfitResult {
     if (this.result !== null) {
       return this.result;
     }
 
-    const pipValue = this.computePipValue();
+    if (!pipValue) {
+      pipValue = this.computePipValue();
+    }
+
     return (this.result = this.computeTakeProfitLevels(pipValue));
   }
 
@@ -88,23 +91,25 @@ export class TakeProfitCalculator
     divider: number,
   ): TakeProfitResult {
     const { position, entryPrice } = this.validState;
-    let takeProfitPips = new BigNumber(0);
+    let takeProfitPips = 0;
 
     if (position === PositionEnum.Long && takeProfitPrice > entryPrice) {
       takeProfitPips = new BigNumber(takeProfitPrice)
         .minus(entryPrice)
-        .multipliedBy(divider);
+        .multipliedBy(divider)
+        .toNumber();
     }
 
     if (position === PositionEnum.Short && takeProfitPrice < entryPrice) {
       takeProfitPips = new BigNumber(entryPrice)
         .minus(takeProfitPrice)
-        .multipliedBy(divider);
+        .multipliedBy(divider)
+        .toNumber();
     }
 
     return this.buildTakeProfitResult(
-      this.computeTakeProfitAmount(takeProfitPrice, pipValue),
-      takeProfitPips.toNumber(),
+      this.computeTakeProfitAmount(takeProfitPips, pipValue),
+      takeProfitPips,
       takeProfitPrice,
     );
   }
