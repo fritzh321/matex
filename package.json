@@ -53,7 +53,6 @@
     "codecov": "npm run coverage && lerna run codecov && codecov"
   },
   "dependencies": {
-    "@matex/calculators": "file:packages/calculators",
-    "@matex/indicators": "file:packages/indicators"
+    "@matex/calculators": "file:packages/calculators"
   }
 }
