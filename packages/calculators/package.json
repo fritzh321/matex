@@ -1,6 +1,6 @@
 {
   "name": "@matex/calculators",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Library of calculators for trading decisions",
   "author": "Tyrcord Inc. <dev@tyrcord.com>",
   "license": "ISC",
