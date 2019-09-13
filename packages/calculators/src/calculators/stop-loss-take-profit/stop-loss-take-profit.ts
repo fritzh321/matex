@@ -2,10 +2,10 @@ import BigNumber from 'bignumber.js';
 
 import { PositionEnum } from '../../enums';
 import { applyMixins } from '../../helpers/mixin.helper';
+import { PipValueMixin } from '../../mixins/pip-value.mixin';
 import { TakeProfitState } from '../../states/take-profit.state';
 import { StopLossTakeProfitResult } from '../../types';
 import { PipValueCalculator } from '../pip-value/pip-value';
-import { PipValueMixin } from '../pip-value/pip-value.mixin';
 import { stopLoss } from './stop-loss';
 import { StopLossMixin } from './stop-loss.mixin';
 import { takeProfit } from './take-profit';

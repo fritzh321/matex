@@ -1,4 +1,4 @@
-import { PipValueState } from '../../states';
+import { PipValueState } from '../states';
 
 export class PipValueMixin<S extends PipValueState = PipValueState> {
   public setValue: (key: keyof S, value: any) => this;

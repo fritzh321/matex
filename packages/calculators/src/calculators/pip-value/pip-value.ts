@@ -1,10 +1,15 @@
 import { BigNumber } from 'bignumber.js';
 
+import {
+  LotDescriptor,
+  LotDescriptors,
+} from '../../descriptors/lot.descriptor';
 import { applyMixins } from '../../helpers/mixin.helper';
+import { LotMixin } from '../../mixins/lot.mixin';
+import { PipValueMixin } from '../../mixins/pip-value.mixin';
 import { StateValidator } from '../../types';
 import { pipValueValidators } from '../../validators/pip-value.validator';
 import { BaseCalculator } from '../abstract/base';
-import { PipValueMixin } from './pip-value.mixin';
 
 import {
   initialPipValueState,
@@ -14,7 +19,7 @@ import {
 export class PipValueCalculator<
   S extends PipValueState = PipValueState,
   R = number
-> extends BaseCalculator<S, R> implements PipValueMixin<S> {
+> extends BaseCalculator<S, R> implements PipValueMixin<S>, LotMixin<S> {
   public baseExchangeRate: (baseExchangeRate: number) => this;
 
   public baseListedSecond: (baseListedSecond: boolean) => this;
@@ -22,6 +27,21 @@ export class PipValueCalculator<
   public pipPrecision: (pipPrecision: number) => this;
 
   public tradingPairExchangeRate: (tradingPairExchangeRate: number) => this;
+
+  public lotDescriptors: (lotDescriptors: LotDescriptors) => this;
+
+  public lot: (lot: number) => this;
+
+  public microLot: (microLot: number) => this;
+
+  public miniLot: (miniLot: number) => this;
+
+  public nanoLot: (nanoLot: number) => this;
+
+  public getPositionSizeWithLotDescriptorAndValue: (
+    lotDescriptor: LotDescriptor,
+    value: number,
+  ) => number;
 
   constructor(
     protected initialState: S = initialPipValueState as S,
@@ -51,7 +71,7 @@ export class PipValueCalculator<
   }
 }
 
-applyMixins(PipValueCalculator, [PipValueMixin]);
+applyMixins(PipValueCalculator, [PipValueMixin, LotMixin]);
 
 export const pipValue = (state: PipValueState) => {
   const {

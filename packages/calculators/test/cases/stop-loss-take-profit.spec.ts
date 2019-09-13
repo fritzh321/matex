@@ -215,10 +215,12 @@ describe('StopLossTakeProfitCalculator', () => {
     });
 
     it('should define the risk ratio value', () => {
-      let results = calculator.positionSize(5_000)
+      let results = calculator
+        .positionSize(5_000)
         .tradingPairExchangeRate(1.5)
         .stopLossAmount(200)
-        .entryPrice(1.5).value();
+        .entryPrice(1.5)
+        .value();
 
       expect(results.riskRewardRatio).to.equal(0);
 
@@ -233,10 +235,12 @@ describe('StopLossTakeProfitCalculator', () => {
     });
 
     it('should define the stopLossPips and stopLossPrice values when stopLossAmuont is set and the position is long', () => {
-      const results = calculator.positionSize(10_000)
+      const results = calculator
+        .positionSize(10_000)
         .tradingPairExchangeRate(1.1)
         .stopLossAmount(200)
-        .entryPrice(1.1).value();
+        .entryPrice(1.1)
+        .value();
 
       expect(results.stopLoss).to.deep.equal({
         amount: 200,
@@ -246,10 +250,12 @@ describe('StopLossTakeProfitCalculator', () => {
     });
 
     it('should define the stopLossAmount and stopLossPips values when stopLossPrice is set and the position is long', () => {
-      const results = calculator.positionSize(10_000)
+      const results = calculator
+        .positionSize(10_000)
         .tradingPairExchangeRate(1.1)
         .stopLossPrice(1.078)
-        .entryPrice(1.1).value();
+        .entryPrice(1.1)
+        .value();
 
       expect(results.stopLoss).to.deep.equal({
         amount: 200,
@@ -259,10 +265,12 @@ describe('StopLossTakeProfitCalculator', () => {
     });
 
     it('should define the stopLossAmount and stopLossPrice values when stopLossPips is set and the position is long', () => {
-      const results = calculator.positionSize(10_000)
+      const results = calculator
+        .positionSize(10_000)
         .tradingPairExchangeRate(1.1)
         .stopLossPips(220)
-        .entryPrice(1.1).value();
+        .entryPrice(1.1)
+        .value();
 
       expect(results.stopLoss).to.deep.equal({
         amount: 200,
@@ -272,10 +280,12 @@ describe('StopLossTakeProfitCalculator', () => {
     });
 
     it('should define the takeProfitPips and takeProfitPrice values when takeProfitAmount is set and the position is long', () => {
-      const results = calculator.positionSize(10_000)
+      const results = calculator
+        .positionSize(10_000)
         .tradingPairExchangeRate(1.1)
         .takeProfitAmount(200)
-        .entryPrice(1.1).value();
+        .entryPrice(1.1)
+        .value();
 
       expect(results.takeProfit).to.deep.equal({
         amount: 200,
@@ -285,10 +295,12 @@ describe('StopLossTakeProfitCalculator', () => {
     });
 
     it('should define the takeProfitAmount and takeProfitPips values when takeProfitPrice is set and the position is long', () => {
-      const results = calculator.positionSize(10_000)
+      const results = calculator
+        .positionSize(10_000)
         .tradingPairExchangeRate(1.1)
         .takeProfitPrice(1.122)
-        .entryPrice(1.1).value();
+        .entryPrice(1.1)
+        .value();
 
       expect(results.takeProfit).to.deep.equal({
         amount: 200,
@@ -298,10 +310,12 @@ describe('StopLossTakeProfitCalculator', () => {
     });
 
     it('should define the takeProfitAmount and takeProfitPrice values when takeProfitPips is set and the position is long', () => {
-      const results = calculator.positionSize(10_000)
+      const results = calculator
+        .positionSize(10_000)
         .tradingPairExchangeRate(1.1)
         .takeProfitPips(220)
-        .entryPrice(1.1).value();
+        .entryPrice(1.1)
+        .value();
 
       expect(results.takeProfit).to.deep.equal({
         amount: 200,
@@ -311,11 +325,13 @@ describe('StopLossTakeProfitCalculator', () => {
     });
 
     it('should define the stopLossPips and stopLossPrice values when stopLossAmuont is set and the position is short', () => {
-      const results = calculator.positionSize(10_000)
+      const results = calculator
+        .positionSize(10_000)
         .tradingPairExchangeRate(1.1)
         .stopLossAmount(200)
         .position(PositionEnum.Short)
-        .entryPrice(1.1).value();
+        .entryPrice(1.1)
+        .value();
 
       expect(results.stopLoss).to.deep.equal({
         amount: 200,
@@ -325,11 +341,13 @@ describe('StopLossTakeProfitCalculator', () => {
     });
 
     it('should define the stopLossAmount and stopLossPips values when stopLossPrice is set and the position is short', () => {
-      const results = calculator.positionSize(10_000)
+      const results = calculator
+        .positionSize(10_000)
         .tradingPairExchangeRate(1.1)
         .stopLossPrice(1.122)
         .position(PositionEnum.Short)
-        .entryPrice(1.1).value();
+        .entryPrice(1.1)
+        .value();
 
       expect(results.stopLoss).to.deep.equal({
         amount: 200,
@@ -339,11 +357,13 @@ describe('StopLossTakeProfitCalculator', () => {
     });
 
     it('should define the stopLossAmount and stopLossPrice values when stopLossPips is set and the position is short', () => {
-      const results = calculator.positionSize(10_000)
+      const results = calculator
+        .positionSize(10_000)
         .tradingPairExchangeRate(1.1)
         .stopLossPips(220)
         .position(PositionEnum.Short)
-        .entryPrice(1.1).value();
+        .entryPrice(1.1)
+        .value();
 
       expect(results.stopLoss).to.deep.equal({
         amount: 200,
@@ -353,11 +373,13 @@ describe('StopLossTakeProfitCalculator', () => {
     });
 
     it('should define the takeProfitPips and takeProfitPrice values when takeProfitAmount is set and the position is short', () => {
-      const results = calculator.positionSize(10_000)
+      const results = calculator
+        .positionSize(10_000)
         .tradingPairExchangeRate(1.1)
         .takeProfitAmount(200)
         .position(PositionEnum.Short)
-        .entryPrice(1.1).value();
+        .entryPrice(1.1)
+        .value();
 
       expect(results.takeProfit).to.deep.equal({
         amount: 200,
@@ -367,11 +389,13 @@ describe('StopLossTakeProfitCalculator', () => {
     });
 
     it('should define the takeProfitAmount and takeProfitPips values when takeProfitPrice is set and the position is short', () => {
-      const results = calculator.positionSize(10_000)
+      const results = calculator
+        .positionSize(10_000)
         .tradingPairExchangeRate(1.1)
         .takeProfitPrice(1.078)
         .position(PositionEnum.Short)
-        .entryPrice(1.1).value();
+        .entryPrice(1.1)
+        .value();
 
       expect(results.takeProfit).to.deep.equal({
         amount: 200,
@@ -381,11 +405,13 @@ describe('StopLossTakeProfitCalculator', () => {
     });
 
     it('should define the takeProfitAmount and takeProfitPrice values when takeProfitPips is set and the position is short', () => {
-      const results = calculator.positionSize(10_000)
+      const results = calculator
+        .positionSize(10_000)
         .tradingPairExchangeRate(1.1)
         .takeProfitPips(220)
         .position(PositionEnum.Short)
-        .entryPrice(1.1).value();
+        .entryPrice(1.1)
+        .value();
 
       expect(results.takeProfit).to.deep.equal({
         amount: 200,

@@ -15,6 +15,11 @@ import {
   SHOULD_UPDATE_CALCULATOR_STATE,
 } from '../messages/shared';
 
+import {
+  defaultLotDescriptors,
+  LotDescriptors,
+} from '../../src/descriptors/lot.descriptor';
+
 const DEFAULT_RESULTS = {
   amountAtRisk: 0,
   pipValue: 0,
@@ -369,6 +374,86 @@ describe('PositionSizeCalculator', () => {
       calculator.stopLossPrice(15);
       expect(calculator.getValueForKey('stopLossPrice')).to.equal(15);
       expect(calculator.getValueForKey('stopLossPips')).to.equal(0);
+    });
+  });
+
+  describe('#lotDescriptors()', () => {
+    it(SHOULD_RETURN_REFERENCE_CALCULATOR, () => {
+      expect(calculator.lotDescriptors(defaultLotDescriptors)).to.equal(
+        calculator,
+      );
+    });
+
+    it(`should update the lot descriptors value`, () => {
+      let lotDescriptors: LotDescriptors = {
+        ...defaultLotDescriptors,
+        lot: {
+          exists: true,
+          multiplier: 5_000,
+        },
+      };
+
+      calculator.lotDescriptors(lotDescriptors);
+      calculator.lot(1);
+
+      expect(calculator.getValueForKey('positionSize')).to.equal(5_000);
+
+      lotDescriptors = {
+        ...defaultLotDescriptors,
+        lot: {
+          exists: false,
+          multiplier: 5_000,
+        },
+      };
+
+      calculator.lotDescriptors(lotDescriptors);
+      calculator.lot(1);
+
+      expect(calculator.getValueForKey('positionSize')).to.equal(0);
+    });
+  });
+
+  describe('#lot()', () => {
+    it(SHOULD_RETURN_REFERENCE_CALCULATOR, () => {
+      expect(calculator.lot(1)).to.equal(calculator);
+    });
+
+    it(`should update the position size value`, () => {
+      calculator.lot(1);
+      expect(calculator.getValueForKey('positionSize')).to.equal(100_000);
+    });
+  });
+
+  describe('#miniLot()', () => {
+    it(SHOULD_RETURN_REFERENCE_CALCULATOR, () => {
+      expect(calculator.miniLot(1)).to.equal(calculator);
+    });
+
+    it(`should update the position size value`, () => {
+      calculator.miniLot(1);
+      expect(calculator.getValueForKey('positionSize')).to.equal(10_000);
+    });
+  });
+
+  describe('#microLot()', () => {
+    it(SHOULD_RETURN_REFERENCE_CALCULATOR, () => {
+      expect(calculator.microLot(1)).to.equal(calculator);
+    });
+
+    it(`should update the position size value`, () => {
+      calculator.microLot(1);
+      expect(calculator.getValueForKey('positionSize')).to.equal(1_000);
+    });
+  });
+
+  describe('#nanoLot()', () => {
+    it(SHOULD_RETURN_REFERENCE_CALCULATOR, () => {
+      expect(calculator.nanoLot(1)).to.equal(calculator);
+    });
+
+    it(`should update the position size value`, () => {
+      calculator.nanoLot(1);
+      expect(calculator.getValueForKey('positionSize')).to.equal(100);
     });
   });
 

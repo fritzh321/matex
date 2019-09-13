@@ -1,10 +1,10 @@
 import { BigNumber } from 'bignumber.js';
 
 import { applyMixins } from '../../helpers/mixin.helper';
+import { PipValueMixin } from '../../mixins/pip-value.mixin';
 import { PositionSizeResult } from '../../types';
 import { positionSizeValidators } from '../../validators/position-size.validator';
 import { PipValueCalculator } from '../pip-value/pip-value';
-import { PipValueMixin } from '../pip-value/pip-value.mixin';
 
 import {
   initialPositionSizeState,
