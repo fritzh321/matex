@@ -1,7 +1,7 @@
+const baseURL = 'https://raw.githubusercontent.com/tyrcord/tbase/master/financial/instruments';
+
 export const Config = {
   fileName: 'instruments.json',
-  instrumentURL:
-    'https://raw.githubusercontent.com/tyrcord/tbase/master/financial/instruments.json',
   projects: {
     matex: {
       destination: 'packages/providers/src/meta',
@@ -11,4 +11,11 @@ export const Config = {
     },
   },
   supportedProjects: ['matex', 'matex_dart'],
+  urls: [
+    `${baseURL}/commodoties.json`,
+    `${baseURL}/cryptos.json`,
+    `${baseURL}/currencies.json`,
+    `${baseURL}/metadata.json`,
+  ],
 };
+

@@ -31,5 +31,21 @@ export async function update() {
 }
 
 function fetchInstrumentsMedata() {
-  return axios.get(Config.instrumentURL).then(({ data }) => data);
+  const promises = [];
+
+  for (const url of Config.urls) {
+    promises.push(axios.get(url).then(({ data }) => data));
+  }
+
+  return Promise.all(promises).then(([
+    commodoties,
+    cryptos,
+    currencies,
+    metadata,
+  ]) => ({
+    ...commodoties,
+    ...cryptos,
+    ...currencies,
+    ...metadata,
+  }));
 }
