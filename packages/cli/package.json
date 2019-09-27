@@ -1,0 +1,47 @@
+{
+  "name": "@matex/cli",
+  "version": "0.1.1",
+  "author": "Tyrcord Inc. <dev@tyrcord.com>",
+  "license": "ISC",
+  "main": "./dist/index.js",
+  "types": "./dist/types/index.d.ts",
+  "repository": "https://github.com/tyrcord/matex/tree/master/packages/cli",
+  "bugs": "https://github.com/tyrcord/tutils/matex",
+  "engines": {
+    "node": ">=10.9.0"
+  },
+  "bin": {
+    "matex-cli": "./dist/index.js"
+  },
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
+  "files": [
+    "dist/**/*"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "rm -rf ./dist && tsc && chmod +x ./dist/index.js",
+    "format": "prettier --write \"src/**/*.ts\"",
+    "lint": "tslint -p tsconfig.json",
+    "prepare": "npm run build",
+    "prepublishOnly": "npm run lint"
+  },
+  "dependencies": {
+    "@tutils/logger": "^0.4.2",
+    "axios": "^0.19.0",
+    "chalk": "^2.4.2",
+    "commander": "^3.0.2",
+    "tslib": "^1.10.0",
+    "write": "^2.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^12.7.8",
+    "prettier": "^1.18.2",
+    "tslint": "^5.20.0",
+    "typescript": "^3.6.3"
+  }
+}
