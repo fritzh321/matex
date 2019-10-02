@@ -1,8 +1,10 @@
 import { Observer } from 'rxjs';
 
-type IFormatterProviderType = (
-  Promise<string> | Observer<string> | string | void
-);
+type IFormatterProviderType =
+  | Promise<string>
+  | Observer<string>
+  | string
+  | void;
 
 export interface IFormatterProvider {
   formatInstrument?(

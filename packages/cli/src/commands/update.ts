@@ -37,15 +37,12 @@ function fetchInstrumentsMedata() {
     promises.push(axios.get(url).then(({ data }) => data));
   }
 
-  return Promise.all(promises).then(([
-    commodoties,
-    cryptos,
-    currencies,
-    metadata,
-  ]) => ({
-    ...commodoties,
-    ...cryptos,
-    ...currencies,
-    ...metadata,
-  }));
+  return Promise.all(promises).then(
+    ([commodoties, cryptos, currencies, metadata]) => ({
+      ...commodoties,
+      ...cryptos,
+      ...currencies,
+      ...metadata,
+    }),
+  );
 }

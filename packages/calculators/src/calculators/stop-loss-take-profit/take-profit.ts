@@ -1,7 +1,7 @@
+import { applyMixins } from '@tutils/helpers';
 import { BigNumber } from 'bignumber.js';
 
 import { PositionEnum } from '../../enums';
-import { applyMixins } from '../../helpers/mixin.helper';
 import { TakeProfitResult } from '../../types';
 import { PipValueCalculator } from '../pip-value/pip-value';
 import { TakeProfitMixin } from './take-profit.mixin';

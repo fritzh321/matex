@@ -1,4 +1,5 @@
-const baseURL = 'https://raw.githubusercontent.com/tyrcord/tbase/master/financial/instruments';
+const baseURL =
+  'https://raw.githubusercontent.com/tyrcord/tbase/master/financial/instruments';
 
 export const Config = {
   fileName: 'instruments.json',
@@ -18,4 +19,3 @@ export const Config = {
     `${baseURL}/metadata.json`,
   ],
 };
-

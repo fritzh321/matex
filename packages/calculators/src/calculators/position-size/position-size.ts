@@ -1,6 +1,6 @@
+import { applyMixins } from '@tutils/helpers';
 import { BigNumber } from 'bignumber.js';
 
-import { applyMixins } from '../../helpers/mixin.helper';
 import { PipValueMixin } from '../../mixins/pip-value.mixin';
 import { PositionSizeResult } from '../../types';
 import { positionSizeValidators } from '../../validators/position-size.validator';

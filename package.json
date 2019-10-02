@@ -17,6 +17,7 @@
     "@types/mocha": "^5.2.6",
     "@types/node": "^12.7.5",
     "@types/sinon": "^7.0.13",
+    "@tutils/helpers": "^0.4.5",
     "bignumber.js": "^9.0.0",
     "chai": "^4.2.0",
     "codecov": "^3.5.0",
@@ -53,6 +54,7 @@
     "codecov": "npm run coverage && lerna run codecov && codecov"
   },
   "dependencies": {
-    "@matex/calculators": "file:packages/calculators"
+    "@matex/calculators": "file:packages/calculators",
+    "@matex/providers": "file:packages/providers"
   }
 }

@@ -1,14 +1,15 @@
+import { applyMixins } from '@tutils/helpers';
 import { BigNumber } from 'bignumber.js';
 
 import { PositionEnum } from '../../enums';
-import { applyMixins } from '../../helpers/mixin.helper';
+import { StopLossResult } from '../../types';
+import { PipValueCalculator } from '../pip-value/pip-value';
+import { StopLossMixin } from './stop-loss.mixin';
+
 import {
   initialStopLossState,
   StopLossState,
 } from '../../states/stop-loss.state';
-import { StopLossResult } from '../../types';
-import { PipValueCalculator } from '../pip-value/pip-value';
-import { StopLossMixin } from './stop-loss.mixin';
 
 export class StopLossCalculator
   extends PipValueCalculator<StopLossState, StopLossResult>

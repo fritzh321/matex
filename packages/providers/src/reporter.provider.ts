@@ -9,12 +9,10 @@ export class ReporterProvider implements IReporterProvider {
     const entries = Object.values(reportState);
     const { length } = entries;
 
-    return entries.reduce((
-      accumulator,
-      { label, value },
-      index,
-    ) => {
-      return accumulator += `${label} ${value}${index < length - 1 ? '\n' : ''}`;
+    return entries.reduce((accumulator, { label, value }, index) => {
+      return (accumulator += `${label} ${value}${
+        index < length - 1 ? '\n' : ''
+      }`);
     }, '');
   }
 }

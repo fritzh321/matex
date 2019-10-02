@@ -1,10 +1,6 @@
+import { applyMixins } from '@tutils/helpers';
 import { BigNumber } from 'bignumber.js';
 
-import {
-  LotDescriptor,
-  LotDescriptors,
-} from '../../descriptors/lot.descriptor';
-import { applyMixins } from '../../helpers/mixin.helper';
 import { LotMixin } from '../../mixins/lot.mixin';
 import { BaseCalculator } from '../abstract/base';
 
@@ -12,6 +8,11 @@ import {
   initialRequiredMarginState,
   RequiredMarginState,
 } from '../../states/required-margin.state';
+
+import {
+  LotDescriptor,
+  LotDescriptors,
+} from '../../descriptors/lot.descriptor';
 
 export class RequiredMarginCalculator
   extends BaseCalculator<RequiredMarginState, number>

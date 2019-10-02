@@ -1,7 +1,7 @@
+import { sortNumbers } from '@tutils/helpers';
 import { BigNumber } from 'bignumber.js';
 
 import { TrendEnum } from '../../enums';
-import { sortNumbers } from '../../helpers/sort.helper';
 import { fibonacciLevelsValidators } from '../../validators/fibonacci-levels.validator';
 import { BaseCalculator } from '../abstract/base';
 

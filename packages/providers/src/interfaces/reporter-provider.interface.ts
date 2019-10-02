@@ -10,7 +10,7 @@ export interface IReportState {
 }
 
 export interface IReporterProvider {
-  report: (reportState: IReportState) => (
-    Promise<string> | Observer<string> | string | void
-  );
+  report: (
+    reportState: IReportState,
+  ) => Promise<string> | Observer<string> | string | void;
 }

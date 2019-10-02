@@ -1,10 +1,6 @@
+import { applyMixins } from '@tutils/helpers';
 import { BigNumber } from 'bignumber.js';
 
-import {
-  LotDescriptor,
-  LotDescriptors,
-} from '../../descriptors/lot.descriptor';
-import { applyMixins } from '../../helpers/mixin.helper';
 import { LotMixin } from '../../mixins/lot.mixin';
 import { PipValueMixin } from '../../mixins/pip-value.mixin';
 import { StateValidator } from '../../types';
@@ -15,6 +11,11 @@ import {
   initialPipValueState,
   PipValueState,
 } from '../../states/pip-value.state';
+
+import {
+  LotDescriptor,
+  LotDescriptors,
+} from '../../descriptors/lot.descriptor';
 
 export class PipValueCalculator<
   S extends PipValueState = PipValueState,
