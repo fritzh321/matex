@@ -3,7 +3,6 @@ import { BigNumber } from 'bignumber.js';
 
 import { LotMixin } from '../../mixins/lot.mixin';
 import { PipValueMixin } from '../../mixins/pip-value.mixin';
-import { StateValidator } from '../../types';
 import { pipValueValidators } from '../../validators/pip-value.validator';
 import { BaseCalculator } from '../abstract/base';
 
@@ -46,7 +45,7 @@ export class PipValueCalculator<
 
   constructor(
     protected initialState: S = initialPipValueState as S,
-    protected validators: Array<StateValidator<S>> = pipValueValidators,
+    protected validators = pipValueValidators,
   ) {
     super(initialState, validators);
   }

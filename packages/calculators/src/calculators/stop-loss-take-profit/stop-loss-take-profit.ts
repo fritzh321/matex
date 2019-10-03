@@ -3,20 +3,18 @@ import BigNumber from 'bignumber.js';
 
 import { PositionEnum } from '../../enums';
 import { PipValueMixin } from '../../mixins/pip-value.mixin';
-import { TakeProfitState } from '../../states/take-profit.state';
 import { StopLossTakeProfitResult } from '../../types';
+import { stopLossTakeProfitValidators } from '../../validators';
 import { PipValueCalculator } from '../pip-value/pip-value';
 import { stopLoss } from './stop-loss';
 import { StopLossMixin } from './stop-loss.mixin';
 import { takeProfit } from './take-profit';
 import { TakeProfitMixin } from './take-profit.mixin';
 
-import { stopLossTakeProfitValidators } from '../../validators/stop-loss-take-profit.validator';
-
 import {
   initialStopLossTakeProfitState,
   StopLossTakeProfitState,
-} from '../../states/stop-loss-take-profit.state';
+} from '../../states';
 
 export const DEFAULT_RESULT: StopLossTakeProfitResult = Object.freeze({
   pipValue: 0,
@@ -33,12 +31,11 @@ export const DEFAULT_RESULT: StopLossTakeProfitResult = Object.freeze({
   },
 });
 
-export class StopLossTakeProfitCalculator
-  extends PipValueCalculator<StopLossTakeProfitState, StopLossTakeProfitResult>
-  implements
-    PipValueMixin<StopLossTakeProfitState>,
-    StopLossMixin<StopLossTakeProfitState>,
-    TakeProfitMixin<TakeProfitState> {
+export class StopLossTakeProfitCalculator<
+  S extends StopLossTakeProfitState = StopLossTakeProfitState,
+  R = StopLossTakeProfitResult
+> extends PipValueCalculator<S, R>
+  implements PipValueMixin<S>, StopLossMixin<S>, TakeProfitMixin<S> {
   public entryPrice: (entryPrice: number) => this;
 
   public position: (position: PositionEnum) => this;
@@ -65,11 +62,14 @@ export class StopLossTakeProfitCalculator
 
   public tradingPairExchangeRate: (tradingPairExchangeRate: number) => this;
 
-  constructor() {
-    super(initialStopLossTakeProfitState, stopLossTakeProfitValidators);
+  constructor(
+    protected initialState: S = initialStopLossTakeProfitState as S,
+    protected validators = stopLossTakeProfitValidators,
+  ) {
+    super(initialState, validators);
   }
 
-  public value(): StopLossTakeProfitResult {
+  public value() {
     if (this.result !== null) {
       return this.result;
     }
@@ -89,7 +89,7 @@ export class StopLossTakeProfitCalculator
         .setState(state)
         .value(pipValue);
 
-      return (this.result = {
+      return (this.result = ({
         pipValue,
         riskRewardRatio: this.computeRiskRewardRatio(
           stopLossResult.amount,
@@ -97,10 +97,10 @@ export class StopLossTakeProfitCalculator
         ),
         stopLoss: stopLossResult,
         takeProfit: takeProfitResult,
-      });
+      } as unknown) as R);
     }
 
-    return DEFAULT_RESULT;
+    return (DEFAULT_RESULT as unknown) as R;
   }
 
   private computeRiskRewardRatio(

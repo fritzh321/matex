@@ -1,13 +1,17 @@
-import { PipValueCalculator } from '@matex/calculators';
+import { RequiredMarginCalculator } from '@matex/calculators';
 import { applyMixins } from '@tutils/helpers';
 
 import { IMatexConfig } from '../interfaces';
 import { MatexPipValueMixin } from '../mixins';
-import { initialMatexPipValueState, MatexPipValueStateType } from '../states';
 import { matexPipValueValidators } from '../validators';
 
-export class MatexPipValueCalculator extends PipValueCalculator<
-  MatexPipValueStateType,
+import {
+  initialMatexRequiredMarginState,
+  MatexRequiredMarginStateType,
+} from '../states';
+
+export class MatexRequiredMarginCalculator extends RequiredMarginCalculator<
+  MatexRequiredMarginStateType,
   Promise<number>
 > {
   public account: (code: string) => this;
@@ -20,7 +24,7 @@ export class MatexPipValueCalculator extends PipValueCalculator<
 
   constructor(
     protected config: IMatexConfig,
-    protected initialState = initialMatexPipValueState,
+    protected initialState = initialMatexRequiredMarginState,
     protected validators = matexPipValueValidators,
   ) {
     super(initialState, validators);
@@ -38,8 +42,8 @@ export class MatexPipValueCalculator extends PipValueCalculator<
   }
 }
 
-applyMixins(MatexPipValueCalculator, [MatexPipValueMixin]);
+applyMixins(MatexRequiredMarginCalculator, [MatexPipValueMixin]);
 
-export const pip = (config: IMatexConfig) => {
-  return new MatexPipValueCalculator(config);
+export const requiredMargin = (config: IMatexConfig) => {
+  return new MatexRequiredMarginCalculator(config);
 };

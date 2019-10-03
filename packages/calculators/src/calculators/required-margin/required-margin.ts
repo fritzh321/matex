@@ -2,6 +2,7 @@ import { applyMixins } from '@tutils/helpers';
 import { BigNumber } from 'bignumber.js';
 
 import { LotMixin } from '../../mixins/lot.mixin';
+import { StateValidator } from '../../types';
 import { BaseCalculator } from '../abstract/base';
 
 import {
@@ -14,9 +15,10 @@ import {
   LotDescriptors,
 } from '../../descriptors/lot.descriptor';
 
-export class RequiredMarginCalculator
-  extends BaseCalculator<RequiredMarginState, number>
-  implements LotMixin<RequiredMarginState> {
+export class RequiredMarginCalculator<
+  S extends RequiredMarginState = RequiredMarginState,
+  R = number
+> extends BaseCalculator<S, R> implements LotMixin<S> {
   public lotDescriptors: (lotDescriptors: LotDescriptors) => this;
 
   public lot: (lot: number) => this;
@@ -32,8 +34,11 @@ export class RequiredMarginCalculator
     value: number,
   ) => number;
 
-  constructor() {
-    super(initialRequiredMarginState);
+  constructor(
+    protected initialState: S = initialRequiredMarginState as S,
+    protected validators?: Array<StateValidator<S>>,
+  ) {
+    super(initialState, validators);
   }
 
   public baseExchangeRate(baseExchangeRate: number) {
@@ -55,10 +60,10 @@ export class RequiredMarginCalculator
 
     const { positionSize, baseExchangeRate, leverage } = this.validState;
 
-    return (this.result = new BigNumber(positionSize)
+    return (this.result = (new BigNumber(positionSize)
       .dividedBy(leverage)
       .multipliedBy(baseExchangeRate)
-      .toNumber());
+      .toNumber() as unknown) as R);
   }
 }
 

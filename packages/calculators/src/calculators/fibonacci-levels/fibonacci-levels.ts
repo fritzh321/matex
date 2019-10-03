@@ -15,12 +15,15 @@ import {
   FibonacciLevelsResult,
 } from '../../types/fibonacci.type';
 
-export class FibonacciLevelsCalculator extends BaseCalculator<
-  FibonacciLevelsState,
-  FibonacciLevelsResult
-> {
-  constructor() {
-    super(initialFibonacciLevelsState, fibonacciLevelsValidators);
+export class FibonacciLevelsCalculator<
+  S extends FibonacciLevelsState = FibonacciLevelsState,
+  R = FibonacciLevelsResult
+> extends BaseCalculator<S, R> {
+  constructor(
+    protected initialState: S = initialFibonacciLevelsState as S,
+    protected validators = fibonacciLevelsValidators,
+  ) {
+    super(initialState, validators);
   }
 
   public customPrice(customPrice: number) {
@@ -60,10 +63,10 @@ export class FibonacciLevelsCalculator extends BaseCalculator<
       return this.result;
     }
 
-    return (this.result = {
+    return (this.result = ({
       extensionLevels: this.computeExtensions(),
       retracementLevels: this.computeRetracements(),
-    });
+    } as unknown) as R);
   }
 
   private computeExtensions() {

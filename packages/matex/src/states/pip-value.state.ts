@@ -1,12 +1,12 @@
 import { initialPipValueState, PipValueState } from '@matex/calculators';
 
-export interface IMatexPipValueState extends PipValueState {
+export type MatexPipValueStateType = PipValueState & {
   account: string | null;
   base: string | null;
   counter: string | null;
-}
+};
 
-export const initialMatexPipValueState: IMatexPipValueState = {
+export const initialMatexPipValueState: MatexPipValueStateType = {
   ...initialPipValueState,
   account: null,
   base: null,

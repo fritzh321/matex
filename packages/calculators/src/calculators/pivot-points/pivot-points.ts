@@ -13,12 +13,15 @@ import {
   PivotPointsState,
 } from '../../states/pivot-points.state';
 
-export class PivotPointsCalculator extends BaseCalculator<
-  PivotPointsState,
-  PivotPointsResult
-> {
-  constructor() {
-    super(initialPivotPointsState, pivotPointsValidators);
+export class PivotPointsCalculator<
+  S extends PivotPointsState = PivotPointsState,
+  R = PivotPointsResult
+> extends BaseCalculator<S, R> {
+  constructor(
+    protected initialState: S = initialPivotPointsState as S,
+    protected validators = pivotPointsValidators,
+  ) {
+    super(initialState, validators);
   }
 
   public closePrice(closePrice: number) {
@@ -69,7 +72,7 @@ export class PivotPointsCalculator extends BaseCalculator<
         break;
     }
 
-    return (this.result = result);
+    return (this.result = (result as unknown) as R);
   }
 }
 

@@ -18,9 +18,10 @@ export const DEFAULT_RESULTS: PositionSizeResult = {
   riskRatio: 0,
 };
 
-export class PositionSizeCalculator
-  extends PipValueCalculator<PositionSizeState, PositionSizeResult>
-  implements PipValueMixin<PositionSizeState> {
+export class PositionSizeCalculator<
+  S extends PositionSizeState = PositionSizeState,
+  R = PositionSizeResult
+> extends PipValueCalculator<S, R> implements PipValueMixin<PositionSizeState> {
   public baseExchangeRate: (baseExchangeRate: number) => this;
 
   public baseListedSecond: (baseListedSecond: boolean) => this;
@@ -29,8 +30,11 @@ export class PositionSizeCalculator
 
   public tradingPairExchangeRate: (tradingPairExchangeRate: number) => this;
 
-  constructor() {
-    super(initialPositionSizeState, positionSizeValidators);
+  constructor(
+    protected initialState: S = initialPositionSizeState as S,
+    protected validators = positionSizeValidators,
+  ) {
+    super(initialState, validators);
   }
 
   public positionSize() {
@@ -67,7 +71,7 @@ export class PositionSizeCalculator
     return this.setValue('stopLossPrice', stopLossPrice);
   }
 
-  public value(): PositionSizeResult {
+  public value() {
     if (this.result !== null) {
       return this.result;
     }
@@ -83,15 +87,15 @@ export class PositionSizeCalculator
           ? this.computePositionSize(amountAtRisk, pipValue, stopLossPips)
           : 0;
 
-      return (this.result = {
+      return (this.result = ({
         amountAtRisk,
         pipValue: pipValue * tradingSize,
         positionSize: tradingSize,
         riskRatio,
-      });
+      } as unknown) as R);
     }
 
-    return (this.result = { ...DEFAULT_RESULTS });
+    return (this.result = ({ ...DEFAULT_RESULTS } as unknown) as R);
   }
 
   protected computePositionSize(

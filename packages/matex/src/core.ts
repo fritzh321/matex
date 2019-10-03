@@ -5,7 +5,15 @@ import {
 } from '@matex/providers';
 
 import { IMatexConfig } from './interfaces';
-import { pip } from './wrappers/pip-value';
+
+import {
+  fibonacciLevels,
+  pip,
+  pivotPoints,
+  positionSize,
+  requiredMargin,
+  stopLossTakeProfit,
+} from './wrappers';
 
 const defaultMatexConfig: IMatexConfig = {
   exchangeProvider: {
@@ -34,5 +42,25 @@ export class Matex {
 
   public pip() {
     return pip(this.config);
+  }
+
+  public pivotPoints() {
+    return pivotPoints(this.config);
+  }
+
+  public fibonacciLevels() {
+    return fibonacciLevels(this.config);
+  }
+
+  public requiredMargin() {
+    return requiredMargin(this.config);
+  }
+
+  public positionSize() {
+    return positionSize(this.config);
+  }
+
+  public stopLossTakeProfit() {
+    return stopLossTakeProfit(this.config);
   }
 }
