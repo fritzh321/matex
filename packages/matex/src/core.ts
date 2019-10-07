@@ -17,7 +17,7 @@ import {
 
 const defaultMatexConfig: IMatexConfig = {
   exchangeProvider: {
-    rates(base: string, counter: string) {
+    rates(_: string, __: string) {
       return {
         price: 1,
         symbol: '$',

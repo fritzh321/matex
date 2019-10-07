@@ -21,7 +21,11 @@ export const testMatexConfig: IMatexConfig = {
           price = 1;
         }
       } else if (base === 'AUD') {
-        price = 100;
+       if (counter === 'JPY') {
+          price = 100;
+        } else if (counter === 'USD') {
+          price = 0.75;
+        }
       }
 
       return {

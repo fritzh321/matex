@@ -154,7 +154,10 @@ describe('RequiredMarginCalculator', () => {
   });
 
   describe('#isValid()', () => {
-    it('Should always be valid', () => {
+    it('Should be valid when the position size and the trading exchange rate are set', () => {
+      expect(calculator.isValid()).to.equal(false);
+      calculator.tradingPairExchangeRate(1);
+      calculator.positionSize(100_000);
       expect(calculator.isValid()).to.equal(true);
     });
   });

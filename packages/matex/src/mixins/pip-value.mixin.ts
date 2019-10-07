@@ -39,7 +39,7 @@ export class MatexPipValueMixin<
       const instrumentMetadata = instrumentProvider.metadata(code);
 
       if (instrumentMetadata) {
-        this.pipPrecision(instrumentMetadata.pip.precision);
+        this.setValue('pipPrecision', instrumentMetadata.pip.precision);
       }
     }
 
@@ -54,21 +54,20 @@ export class MatexPipValueMixin<
       tradingPairQuoteAsync,
     );
 
-    this.tradingPairExchangeRate(tradingPairQuote.price);
+      this.setValue('tradingPairExchangeRate', tradingPairQuote.price);
 
-    if (account === counter) {
-      this.baseListedSecond(true);
+      if (account === counter) {
+        this.setValue('baseListedSecond', true);
     } else if (account !== base) {
       const accountBaseQuoteAsync = exchangeProvider!.rates(account!, base!);
       const accountBaseQuote = await this.getQuoteFromObject(
         accountBaseQuoteAsync,
       );
-
-      this.baseExchangeRate(accountBaseQuote.price);
+      this.setValue('baseExchangeRate', accountBaseQuote.price);
     }
   }
 
-  private async getQuoteFromObject(quotish: any) {
+  protected async getQuoteFromObject(quotish: any) {
     let quote: IQuote;
 
     if (quotish instanceof Promise) {

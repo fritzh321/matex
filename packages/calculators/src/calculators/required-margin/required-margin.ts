@@ -2,8 +2,9 @@ import { applyMixins } from '@tutils/helpers';
 import { BigNumber } from 'bignumber.js';
 
 import { LotMixin } from '../../mixins/lot.mixin';
-import { StateValidator } from '../../types';
-import { BaseCalculator } from '../abstract/base';
+import { PipValueMixin } from '../../mixins/pip-value.mixin';
+import { requiredMarginValidators } from '../../validators';
+import { PipValueCalculator } from '../pip-value/pip-value';
 
 import {
   initialRequiredMarginState,
@@ -18,7 +19,7 @@ import {
 export class RequiredMarginCalculator<
   S extends RequiredMarginState = RequiredMarginState,
   R = number
-> extends BaseCalculator<S, R> implements LotMixin<S> {
+  > extends PipValueCalculator<S, R> implements PipValueMixin<S>, LotMixin<S> {
   public lotDescriptors: (lotDescriptors: LotDescriptors) => this;
 
   public lot: (lot: number) => this;
@@ -36,21 +37,13 @@ export class RequiredMarginCalculator<
 
   constructor(
     protected initialState: S = initialRequiredMarginState as S,
-    protected validators?: Array<StateValidator<S>>,
+    protected validators = requiredMarginValidators,
   ) {
     super(initialState, validators);
   }
 
-  public baseExchangeRate(baseExchangeRate: number) {
-    return this.setValue('baseExchangeRate', baseExchangeRate);
-  }
-
   public leverage(leverage: number) {
     return this.setValue('leverage', leverage);
-  }
-
-  public positionSize(positionSize: number) {
-    return this.setValue('positionSize', positionSize);
   }
 
   public value() {
@@ -58,16 +51,26 @@ export class RequiredMarginCalculator<
       return this.result;
     }
 
-    const { positionSize, baseExchangeRate, leverage } = this.validState;
+    const {
+      positionSize,
+      tradingPairExchangeRate,
+      leverage,
+      baseListedSecond,
+      baseExchangeRate,
+    } = this.validState;
 
     return (this.result = (new BigNumber(positionSize)
       .dividedBy(leverage)
-      .multipliedBy(baseExchangeRate)
+      .multipliedBy(
+        baseExchangeRate > 0 ?
+          baseExchangeRate : baseListedSecond ?
+            tradingPairExchangeRate : 1
+      )
       .toNumber() as unknown) as R);
   }
 }
 
-applyMixins(RequiredMarginCalculator, [LotMixin]);
+applyMixins(RequiredMarginCalculator, [PipValueMixin, LotMixin]);
 
 export const requiredMargin = () => {
   return new RequiredMarginCalculator();

@@ -1,15 +1,11 @@
-import { defaultLotDescriptors } from '../descriptors/lot.descriptor';
 import { LotState } from './lot.state';
+import { initialPipValueState, PipValueState } from './pip-value.state';
 
 export type RequiredMarginState = {
-  baseExchangeRate: number;
   leverage: number;
-  positionSize: number;
-} & LotState;
+} & LotState & PipValueState;
 
 export const initialRequiredMarginState: RequiredMarginState = {
-  baseExchangeRate: 1,
+  ...initialPipValueState,
   leverage: 1,
-  lotDescriptors: defaultLotDescriptors,
-  positionSize: 0,
 };

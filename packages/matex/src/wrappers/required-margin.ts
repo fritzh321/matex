@@ -1,9 +1,10 @@
 import { RequiredMarginCalculator } from '@matex/calculators';
+import { IQuote } from '@matex/providers';
 import { applyMixins } from '@tutils/helpers';
 
 import { IMatexConfig } from '../interfaces';
 import { MatexPipValueMixin } from '../mixins';
-import { matexPipValueValidators } from '../validators';
+import { matexRequiredMarginValidators } from '../validators';
 
 import {
   initialMatexRequiredMarginState,
@@ -13,19 +14,19 @@ import {
 export class MatexRequiredMarginCalculator extends RequiredMarginCalculator<
   MatexRequiredMarginStateType,
   Promise<number>
-> {
+  > {
   public account: (code: string) => this;
 
   public base: (code: string) => this;
 
   public counter: (code: string) => this;
 
-  protected setExchangeRates: () => Promise<void>;
+  protected getQuoteFromObject: (quote: any) => Promise<IQuote>;
 
   constructor(
     protected config: IMatexConfig,
     protected initialState = initialMatexRequiredMarginState,
-    protected validators = matexPipValueValidators,
+    protected validators = matexRequiredMarginValidators,
   ) {
     super(initialState, validators);
   }
@@ -39,6 +40,31 @@ export class MatexRequiredMarginCalculator extends RequiredMarginCalculator<
     }
 
     return 0;
+  }
+
+  protected async setExchangeRates() {
+    const { exchangeProvider } = this.config;
+    const { account, base, counter } = this.validState;
+    if (account === base) {
+      this.setValue('tradingPairExchangeRate', 1);
+    } else {
+      const tradingPairQuoteAsync = exchangeProvider!.rates(base!, counter!);
+      const tradingPairQuote = await this.getQuoteFromObject(
+        tradingPairQuoteAsync,
+      );
+
+      this.setValue('tradingPairExchangeRate', tradingPairQuote.price);
+
+      if (account === counter) {
+        this.setValue('baseListedSecond', true);
+      } else {
+        const accountBaseQuoteAsync = exchangeProvider!.rates(base!, account!);
+        const accountBaseQuote = await this.getQuoteFromObject(
+          accountBaseQuoteAsync,
+        );
+        this.setValue('baseExchangeRate', accountBaseQuote.price);
+      }
+    }
   }
 }
 
