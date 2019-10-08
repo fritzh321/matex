@@ -3,6 +3,9 @@ node_js:
   - "10"
   - "12"
 
+script:
+  - NODE_ICU_DATA="$(pwd)/node_modules/full-icu"
+
 matrix:
   include:
     - node_js: "10"
