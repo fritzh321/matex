@@ -3,8 +3,6 @@
   "version": "0.1.1",
   "author": "Tyrcord Inc. <dev@tyrcord.com>",
   "license": "ISC",
-  "main": "./dist/index.js",
-  "types": "./dist/types/index.d.ts",
   "repository": "https://github.com/tyrcord/matex/tree/master/packages/cli",
   "bugs": "https://github.com/tyrcord/tutils/matex",
   "engines": {
