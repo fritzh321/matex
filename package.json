@@ -55,7 +55,6 @@
   },
   "dependencies": {
     "@matex/calculators": "file:./packages/calculators",
-    "@matex/cli": "file:./packages/cli",
     "@matex/core": "file:./packages/core",
     "@matex/providers": "file:./packages/providers"
   }
