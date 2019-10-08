@@ -1,6 +1,6 @@
 {
   "name": "@matex/cli",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "author": "Tyrcord Inc. <dev@tyrcord.com>",
   "license": "ISC",
   "repository": "https://github.com/tyrcord/matex/tree/master/packages/cli",

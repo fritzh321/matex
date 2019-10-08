@@ -1,6 +1,6 @@
 {
   "name": "@matex/core",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "author": "Tyrcord Inc. <dev@tyrcord.com>",
   "license": "ISC",
   "main": "./dist/index.js",
@@ -28,7 +28,7 @@
     "codecov": "nyc merge .nyc_output ./coverage/coverage.json"
   },
   "dependencies": {
-    "@matex/calculators": "^0.1.1",
+    "@matex/calculators": "^0.1.2",
     "@matex/providers": "^0.0.1"
   },
   "peerDependencies": {
