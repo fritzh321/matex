@@ -5,7 +5,7 @@
 ## Usage
 
 ```
-const matex = require('matex');
+const matex = require('@matex/core');
 
 // TODO: DEMONSTRATE API
 ```
