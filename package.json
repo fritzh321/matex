@@ -13,17 +13,17 @@
     "node": ">=8.9.0"
   },
   "devDependencies": {
+    "@tutils/helpers": "^0.4.5",
     "@types/chai": "^4.2.2",
     "@types/mocha": "^5.2.6",
     "@types/node": "^12.7.5",
     "@types/sinon": "^7.0.13",
-    "@tutils/helpers": "^0.4.5",
     "bignumber.js": "^9.0.0",
     "chai": "^4.2.0",
     "codecov": "^3.5.0",
     "esm": "^3.2.22",
     "husky": "^3.0.5",
-    "lerna": "^3.15.0",
+    "lerna": "^3.16.4",
     "mocha": "^6.1.4",
     "mocha-cakes-2": "3.3.0",
     "nyc": "^14.1.1",
@@ -54,7 +54,9 @@
     "codecov": "npm run coverage && lerna run codecov && codecov"
   },
   "dependencies": {
-    "@matex/calculators": "file:packages/calculators",
-    "@matex/providers": "file:packages/providers"
+    "@matex/calculators": "file:./packages/calculators",
+    "@matex/cli": "file:./packages/cli",
+    "@matex/core": "file:./packages/core",
+    "@matex/providers": "file:./packages/providers"
   }
 }
